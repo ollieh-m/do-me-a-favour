@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
+  
+  #authentication
+  resource :session, only: [:new, :create, :destroy]
+  resources :users, only: [:new, :create]
+  
+  #homepages
+  root to: 'home#signed_out'
+  get 'dashboard' => 'home#signed_in'
+  
+  #clans
+  resources :clans, only: [:index, :create] do
+    resource :join, only: [:create, :destroy]
+  end
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

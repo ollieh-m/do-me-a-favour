@@ -11,6 +11,9 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+gem 'monban'
+gem 'monban-generators'
+
 group :development, :test do
   gem 'byebug'
 end
@@ -19,6 +22,7 @@ group :test do
   gem 'database_cleaner'
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'shoulda-matchers', '~> 3.1'
 end
 
 group :development do

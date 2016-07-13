@@ -1,0 +1,34 @@
+<div class='myclans'>
+  <% unless @myclans.nil? %>
+    <% @myclans.each do |clan| %>
+      <li>
+        <%= clan.name %>
+        <%= clan.description %>
+        <%= button_to "Leave #{clan.name}", clan_join_path(clan), method: :delete %>
+      </li>
+    <% end %>
+  <% end %>
+</div>
+
+<div class='otherclans'>
+  <% unless @clans.nil? %>
+    <% @clans.each do |clan| %>
+      <li>
+        <%= button_to "Join #{clan.name}", clan_join_path(clan) %>
+      </li>
+    <% end %>
+  <% end %>
+</div>
+
+<%= form_for @clan do |f| %>
+  <% unless flash[:errors].nil? %>
+    <% flash[:errors].each do |error| %>
+      <li><%= error %></li>
+    <% end %>
+  <% end %>
+  <%= f.label :name %>
+  <%= f.text_field :name, placeholder: "#{@clan.name}" %>
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+  <%= f.submit "Create new clan" %>
+<% end %>
