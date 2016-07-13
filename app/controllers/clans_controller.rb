@@ -2,7 +2,7 @@ class ClansController < ApplicationController
     
   def index
     @clan = Clan.new
-    @clans = Clan.all
+    @clans = Clan.all_except_where(user: current_user)
     @myclans = current_user.clans
   end
   
@@ -12,6 +12,8 @@ class ClansController < ApplicationController
       redirect_to request.referer
     else
       flash[:errors] = @clan.errors.full_messages
+      @clans = Clan.all_except_where(user: current_user)
+      @myclans = current_user.clans
       render :index
     end
   end

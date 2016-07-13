@@ -7,5 +7,6 @@ feature 'User joins a clan' do
     click_on 'Manage my clans'
     click_on 'Join 3 Greenway Road'
     expect(page).to have_css('.myclans li', text: '3 Greenway Road')
+    expect(page).not_to have_button('Join 3 Greenway Road')
   end
 end
