@@ -14,9 +14,8 @@ class Clan < ActiveRecord::Base
     end
   end
   
-  def self.all_except_where(user:)
-    clan_ids = UserClanRelationship.where(user: user).map(&:clan_id)
-    self.where.not(id: clan_ids)
+  def self.all_except(clans)
+    self.all - clans
   end
     
 end

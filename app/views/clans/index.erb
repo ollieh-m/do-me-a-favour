@@ -11,8 +11,8 @@
 </div>
 
 <div class='otherclans'>
-  <% unless @clans.nil? %>
-    <% @clans.each do |clan| %>
+  <% unless @otherclans.nil? %>
+    <% @otherclans.each do |clan| %>
       <li>
         <%= button_to "Join #{clan.name}", clan_join_path(clan) %>
       </li>

@@ -6,5 +6,9 @@ module Features
     fill_in('Description', with: description)
     click_on('Create new clan')
   end
+  
+  def display_myclan(name)
+    have_css('.myclans li', text: name)
+  end
 
 end

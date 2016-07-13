@@ -2,7 +2,7 @@ feature 'User signs up and creates clan' do
   scenario 'then sees it in the list of their clans' do
     sign_up
     create_clan(name: '3 Greenway Road', description: 'home')
-    expect(page).to have_css('.myclans li', text: '3 Greenway Road')
+    expect(page).to display_myclan('3 Greenway Road')
   end
   
   scenario 'which is not in the list of clans for a different user' do
@@ -11,7 +11,7 @@ feature 'User signs up and creates clan' do
     sign_out
     sign_up(username: 'Testuser2',email: 'testuser2@email.com')
     click_on 'Manage my clans'
-    expect(page).not_to have_css('.myclans li', text: '3 Greenway Road')
+    expect(page).not_to display_myclan('3 Greenway Road')
   end
 end
 feature 'User signs up and creates invalid clan' do

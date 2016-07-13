@@ -15,5 +15,13 @@ describe Clan do
       expect(association_collection).to have_received(:build).with({user: :user})
     end
   end
+  
+  context '#all_except' do
+    it 'returns all clans except those specified' do
+      allow(Clan).to receive(:all).and_return([:clan1,:clan2,:clan3])
+      result = Clan.all_except([:clan1,:clan2])
+      expect(result).to eq [:clan3]
+    end
+  end
     
 end

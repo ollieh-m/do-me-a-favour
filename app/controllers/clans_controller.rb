@@ -2,8 +2,7 @@ class ClansController < ApplicationController
     
   def index
     @clan = Clan.new
-    @clans = Clan.all_except_where(user: current_user)
-    @myclans = current_user.clans
+    set_display_clans
   end
   
   def create
@@ -11,9 +10,8 @@ class ClansController < ApplicationController
     if @clan.save
       redirect_to request.referer
     else
-      flash[:errors] = @clan.errors.full_messages
-      @clans = Clan.all_except_where(user: current_user)
-      @myclans = current_user.clans
+      flash.now[:errors] = @clan.errors.full_messages
+      set_display_clans
       render :index
     end
   end
@@ -22,6 +20,11 @@ class ClansController < ApplicationController
   
   def clan_params
     params.require(:clan).permit(:name,:description)
+  end
+  
+  def set_display_clans
+    @myclans = current_user.clans
+    @otherclans = Clan.all_except(@myclans)
   end
   
 end
