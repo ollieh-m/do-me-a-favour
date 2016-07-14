@@ -5,10 +5,17 @@
     <% end %>
   <% end %>
   <% @clans.each do |clan| %>
-    <%= label_tag("clan[#{clan.id}]".to_sym, clan.name) %>
-    <%= check_box_tag("clan[#{clan.id}]".to_sym) %>
+    <div>
+      <%= label_tag("clan[#{clan.id}]".to_sym, clan.name) %>
+      <%= check_box_tag("clan[#{clan.id}]".to_sym) %>
+    </div>
   <% end %>
-  <%= label_tag(:description, "Description") %>
-  <%= text_field_tag(:description) %>
+  <div>
+    <%= label_tag(:description, "Description") %>
+    <%= text_field_tag(:description) %>
+  </div>
+  <div>
+    <%= select_tag(:users_benefiting, options_from_collection_for_select(@users,:id,:username), {multiple: true}) %>
+  </div>
   <%= submit_tag("Request help") %>
 <% end %>

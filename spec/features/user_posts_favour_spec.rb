@@ -34,6 +34,24 @@ feature 'User posts a favour just for themself' do
     expect(page).not_to have_css('.favours li', text: 'The washing up')
   end
 end
+
+feature 'User posts a favour for themself and another user' do
+  scenario 'so both can see it in the list of favours they can do for other people' do
+    sign_up(username:'Testuser2',email:'testuser2@email.com')
+    sign_out
+    sign_up
+    create_clan(name: '3 Greenway Road', description: 'Home')
+    click_on "Testuser's dashboard"
+    click_on 'Favours for me'
+    check 'clan_1'
+    fill_in('Description', with: 'The washing up')
+    select('Testuser2', from: 'users_benefiting')
+    click_on 'Request help'
+    click_on "Testuser's dashboard"
+    click_on 'Favours for others'
+    expect(page).to have_css('.favours li', text: 'The washing up')
+  end
+end
   
 feature 'User posts an invalid favour' do
   scenario 'with no description' do
