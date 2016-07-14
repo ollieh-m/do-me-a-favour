@@ -2,6 +2,7 @@ describe Favour do
 
   it { should have_many :favour_clan_relationships }
   it { should have_many :clans }
+  it { should validate_presence_of(:description) }
   
   context '#build_with' do
     it 'builds a new favour_clan_relationship associated with a new favour and the specified clans' do
