@@ -5,7 +5,7 @@ class FavoursController < ApplicationController
   end
   
   def forothersindex
-    @favours = Favour.all_benefiting_others_and_in_clans_of(user: current_user)
+    @favours = Favour.in_clans_of(user: current_user)
   end
   
   def create

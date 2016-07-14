@@ -17,7 +17,7 @@ class Favour < ActiveRecord::Base
     end
   end
   
-  def self.all_benefiting_others_and_in_clans_of(user:)
+  def self.in_clans_of(user:)
     favours = extract_favours_from_clans_of(user)
     exclude_favours_only_benefiting(user,favours)
   end

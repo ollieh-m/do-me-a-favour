@@ -37,7 +37,7 @@ describe Favour do
       clan2 = double(:clan, favours: [favour2, favour3])
       allow(user).to receive(:clans).and_return([clan1,clan2])
       
-      result = Favour.all_benefiting_others_and_in_clans_of(user: user)
+      result = Favour.in_clans_of(user: user)
       
       expect(result).to eq [favour1,favour2]
     end
