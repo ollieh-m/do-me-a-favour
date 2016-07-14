@@ -18,4 +18,7 @@ feature 'User posts a favour just for themself' do
     click_on 'Favours for others'
     expect(page).to have_css('.favours li', text: 'The washing up')
   end
+  scenario 'and they do not see the favour in their own list of favours they can bid on' do
+    
+  end
 end

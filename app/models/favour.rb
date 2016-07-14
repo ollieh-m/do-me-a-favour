@@ -16,7 +16,7 @@ class Favour < ActiveRecord::Base
     user.clans.each do |clan|
       favours += clan.favours
     end
-    favours = favours.uniq
+    favours.uniq
   end
   
 end
