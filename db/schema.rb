@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160714111138) do
+ActiveRecord::Schema.define(version: 20160714174349) do
 
   create_table "clans", force: :cascade do |t|
     t.string   "name"
@@ -47,6 +47,16 @@ ActiveRecord::Schema.define(version: 20160714111138) do
 
   add_index "user_clan_relationships", ["clan_id"], name: "index_user_clan_relationships_on_clan_id"
   add_index "user_clan_relationships", ["user_id"], name: "index_user_clan_relationships_on_user_id"
+
+  create_table "user_favour_relationships", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "favour_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "user_favour_relationships", ["favour_id"], name: "index_user_favour_relationships_on_favour_id"
+  add_index "user_favour_relationships", ["user_id"], name: "index_user_favour_relationships_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",           null: false
