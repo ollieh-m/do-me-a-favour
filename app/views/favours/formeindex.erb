@@ -4,6 +4,7 @@
       <li><%= error %></li>
     <% end %>
   <% end %>
+  Choose clans to post favour in...
   <% @clans.each do |clan| %>
     <div>
       <%= label_tag("clan[#{clan.id}]".to_sym, clan.name) %>
@@ -15,6 +16,7 @@
     <%= text_field_tag(:description) %>
   </div>
   <div>
+    Choose anyone else you this favour is for...
     <%= select_tag(:users_benefiting, options_from_collection_for_select(@users,:id,:username), {multiple: true}) %>
   </div>
   <%= submit_tag("Request help") %>
