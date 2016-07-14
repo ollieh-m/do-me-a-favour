@@ -2,6 +2,8 @@ describe Clan do
     
   it { should have_many :user_clan_relationships }
   it { should have_many :users }
+  it { should have_many :favour_clan_relationships }
+  it { should have_many :favours }
   it { should validate_presence_of(:name) }
   it { should validate_uniqueness_of(:name) }
   

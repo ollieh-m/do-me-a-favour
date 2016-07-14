@@ -1,0 +1,10 @@
+<%= form_tag :favours do |f| %>
+  <% @clans.each do |clan| %>
+    <%= label_tag("clan[#{clan.id}]".to_sym, clan.name) %>
+    <%= check_box_tag("clan[#{clan.id}]".to_sym) %>
+  <% end %>
+  <%= label_tag(:description, "Description") %>
+  <%= text_field_tag(:description) %>
+  <%= submit_tag("Request help") %>
+<% end %>
+    

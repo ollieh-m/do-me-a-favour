@@ -13,6 +13,11 @@ Rails.application.routes.draw do
     resource :join, only: [:create, :destroy]
   end
   
+  #favours
+  resources :favours, only: [:create]
+  get 'favoursforme' => 'favours#formeindex'
+  get 'favoursforothers' => 'favours#forothersindex'
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

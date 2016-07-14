@@ -6,6 +6,10 @@ class Clan < ActiveRecord::Base
     end
   end
   has_many :users, through: :user_clan_relationships
+  
+  has_many :favour_clan_relationships
+  has_many :favours, through: :favour_clan_relationships
+  
   validates :name, presence: true, uniqueness: true
   
   def self.build_with(user:, params:)
