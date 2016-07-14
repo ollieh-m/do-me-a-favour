@@ -43,24 +43,24 @@ describe Favour do
     end
   end
   
-  context '#validate_given' do
+  context '#validate_with' do
     it "adds an error if clans is empty and returns false without saving" do
       favour = Favour.new(description:'Dummy description')
-      result = favour.validate_given(clans:nil)
+      result = favour.validate_with(clans:nil)
       expect(favour.errors).to eq ['You need to choose at least one clan']
       expect(Favour.all.count).to eq 0
       expect(result).to eq false
     end
     it "adds an error if the initialized favour has no description and returns false without saving" do
       favour = Favour.new(description:'')
-      result = favour.validate_given(clans:[:clan])
+      result = favour.validate_with(clans:[:clan])
       expect(favour.errors).to eq ["Description can't be blank"]
       expect(Favour.all.count).to eq 0
       expect(result).to eq false
     end
     it "adds both errors if the initialized favour has no description and no clans are given" do
       favour = Favour.new(description:'')
-      result = favour.validate_given(clans:nil)
+      result = favour.validate_with(clans:nil)
       expect(favour.errors).to eq ['You need to choose at least one clan',"Description can't be blank"]
       expect(Favour.all.count).to eq 0
       expect(result).to eq false

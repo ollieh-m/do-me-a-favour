@@ -10,7 +10,7 @@ class FavoursController < ApplicationController
   
   def create
     @favour = Favour.build_with(users_benefiting: [current_user], clans: params[:clan], params: favour_params)
-    if @favour.validate_given(clans: params[:clan])
+    if @favour.validate_with(clans: params[:clan])
       redirect_to request.referer
     else
       flash.now[:errors] = @favour.errors

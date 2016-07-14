@@ -1,6 +1,4 @@
 class Favour < ActiveRecord::Base
-  
-  attr_reader :customerrors
 
   has_many :favour_clan_relationships
   has_many :clans, through: :favour_clan_relationships
@@ -22,7 +20,7 @@ class Favour < ActiveRecord::Base
     exclude_favours_only_benefiting(user,favours)
   end
   
-  def validate_given(clans:)
+  def validate_with(clans:)
     if(clans.nil? || self.description == '')
       set_error('You need to choose at least one clan') if clans.nil?
       set_error("Description can't be blank") if description == ''
