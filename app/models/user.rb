@@ -5,6 +5,9 @@ class User < ActiveRecord::Base
   has_many :user_clan_relationships, dependent: :destroy
   has_many :clans, through: :user_clan_relationships
   
+  has_many :bids
+  has_many :favours_bidded_on, through: :bids, source: :favour
+  
   has_many :user_favour_relationships
   has_many :favours_for_me, through: :user_favour_relationships, source: :favour
 end

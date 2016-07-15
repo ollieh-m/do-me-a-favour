@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160714174349) do
+ActiveRecord::Schema.define(version: 20160715084702) do
+
+  create_table "bids", force: :cascade do |t|
+    t.integer  "favour_id"
+    t.integer  "user_id"
+    t.boolean  "accepted"
+    t.integer  "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "bids", ["favour_id"], name: "index_bids_on_favour_id"
+  add_index "bids", ["user_id"], name: "index_bids_on_user_id"
 
   create_table "clans", force: :cascade do |t|
     t.string   "name"

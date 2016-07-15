@@ -16,7 +16,7 @@ feature 'User posts a favour just for themself' do
     click_on 'Join 3 Greenway Road'
     click_on "Testuser2's dashboard"
     click_on 'Favours for others'
-    expect(page).to have_css('.favours li', text: 'The washing up')
+    expect(page).to display_favour_i_can_bid_on(text:'The washing up')
   end
   scenario 'and they do not see the favour in their own list of favours they can bid on' do
     sign_up
@@ -31,7 +31,7 @@ feature 'User posts a favour just for themself' do
     click_on 'Request help'
     click_on "Testuser's dashboard"
     click_on 'Favours for others'
-    expect(page).not_to have_css('.favours li', text: 'The washing up')
+    expect(page).not_to display_favour_i_can_bid_on(text:'The washing up')
   end
 end
 
@@ -49,7 +49,7 @@ feature 'User posts a favour for themself and another user' do
     click_on 'Request help'
     click_on "Testuser's dashboard"
     click_on 'Favours for others'
-    expect(page).to have_css('.favours li', text: 'The washing up')
+    expect(page).to display_favour_i_can_bid_on(text:'The washing up')
   end
 end
   
@@ -86,6 +86,6 @@ feature 'User posts an invalid favour' do
     click_on 'Join 3 Greenway Road'
     click_on "Testuser2's dashboard"
     click_on 'Favours for others'
-    expect(page).not_to have_css('.favours li', text: 'The washing up')
+    expect(page).not_to display_favour_i_can_bid_on(text:'The washing up')
   end
 end

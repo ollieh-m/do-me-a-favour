@@ -4,6 +4,8 @@ describe Favour do
   it { should have_many :clans }
   it { should have_many :user_favour_relationships }
   it { should have_many :users_benefiting }
+  it { should have_many :bids }
+
   it { should validate_presence_of(:description) }
   
   context '#build_with' do

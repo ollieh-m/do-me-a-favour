@@ -6,6 +6,8 @@ class Favour < ActiveRecord::Base
   has_many :user_favour_relationships
   has_many :users_benefiting, through: :user_favour_relationships, source: :user
   
+  has_many :bids
+  
   validates :description, presence: true
   
   def self.build_with(users_benefiting:,clans:,params:)

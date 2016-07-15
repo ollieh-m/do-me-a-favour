@@ -14,7 +14,10 @@ Rails.application.routes.draw do
   end
   
   #favours
-  resources :favours, only: [:create]
+  resources :favours, only: [:create] do
+    resources :bids, only: [:create]
+  end
+    
   get 'favoursforme' => 'favours#formeindex'
   get 'favoursforothers' => 'favours#forothersindex'
   

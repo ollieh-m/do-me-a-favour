@@ -1,5 +1,17 @@
-<div class='favours'>
-  <% @favours.each do |favour| %>
+<div class='favours-i-can-bid-on'>
+  <% @bid_on_favours.each do |favour| %>
+    <li><%= favour.description %>
+      <%= form_for [favour, @bid] do |f| %>
+        <%= f.label :amount, "Number of thank you points" %>
+        <%= f.number_field(:amount, in: 1.0..100.0) %>
+        <%= f.submit "Bid" %>
+      <% end %>
+    </li>
+  <% end %>
+</div>
+
+<div class='favours-i-bidded-on'>
+  <% @bidded_on_favours.each do |favour| %>
     <li><%= favour.description %></li>
   <% end %>
 </div>
