@@ -21,3 +21,16 @@
   </div>
   <%= submit_tag("Request help") %>
 <% end %>
+
+<div class='favours-benefiting-me'>
+  <% @favours_for_me.each do |favour| %>
+    <li>
+      <%= favour.description %>
+      <p class='status'>
+        <% if favour.status == 'Bids pending' %>
+          <%= 'Bids in waiting on your response' %>
+        <% end %>
+      </p>
+    </li>
+  <% end %>
+</div>

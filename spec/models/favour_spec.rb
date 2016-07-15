@@ -52,5 +52,26 @@ describe Favour do
       expect(result).to eq false
     end
   end
+  
+  context '#status' do
+    let(:bid1){ double(:bid, accepted: nil) }
+    let(:bid2){ double(:bid, accepted: nil) }
+    let(:bid3){ double(:bid, accepted: true) }
+    it "returns 'bids pending' if the favour has bids in but none have been accepted" do
+      allow_any_instance_of(Favour).to receive(:bids).and_return([bid1,bid2])
+      favour = Favour.create(description: 'Test')
+      expect(favour.status).to eq 'Bids pending'
+    end
+    it "returns 'bid accepted' if the favour has bids in and one has been accepted" do
+      allow_any_instance_of(Favour).to receive(:bids).and_return([bid1,bid3])
+      favour = Favour.create(description: 'Test')
+      expect(favour.status).to eq 'Bid accepted'
+    end
+    it "returns 'no bids' if the favour has no bids in" do
+      allow_any_instance_of(Favour).to receive(:bids).and_return([])
+      favour = Favour.create(description: 'Test')
+      expect(favour.status).to eq 'No bids'
+    end
+  end
 
 end

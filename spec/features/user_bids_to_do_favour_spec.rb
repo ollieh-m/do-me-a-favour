@@ -1,5 +1,5 @@
 feature 'User bids to do a favour' do
-  scenario 'and the favour moves from favours I can bid on to favours I have already bidded on' do
+  before do
     sign_up
     create_clan(name: '3 Greenway Road', description: 'Home')
     click_on "Testuser's dashboard"
@@ -15,14 +15,24 @@ feature 'User bids to do a favour' do
     click_on 'Favours for others'
     fill_in('Number of thank you points', with: '20')
     click_on 'Bid'
+  end
+  scenario 'and the favour moves from favours I can bid on to favours I have already bidded on' do
     expect(page).to have_css('.favours-i-bidded-on li', text: 'The washing up')
   end
   context "and the favour has a 'bids pending' status" do
     scenario "displayed as 'bid awaiting response' in 'favours I have bidded for'" do 
-  
+      expect(page).to have_css('.favours-i-bidded-on li p.status', text: 'Awaiting response to your bid')
     end
     scenario "and 'bids waiting on your response' in favours for me'" do
-      
+      sign_out
+      click_on 'Sign in'
+      fill_in('Email', with: 'testuser@email.com')
+      fill_in('Password', with: '123456')
+      within(:css, '.sign_in') do
+        click_on 'Sign in'
+      end
+      click_on 'Favours for me'
+      expect(page).to have_css('.favours-benefiting-me li p.status', text: 'Bids in waiting on your response')
     end
   end
 end

@@ -1,4 +1,4 @@
-<%= form_for :session, url: session_path do |form| %>
+<%= form_for :session, url: session_path, html: {class: 'sign_in'} do |form| %>
   <div>
     <%= form.label :email %>
     <%= form.email_field :email %>

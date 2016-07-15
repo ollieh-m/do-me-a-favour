@@ -26,6 +26,7 @@ class FavoursController < ApplicationController
   def set_display_attributes
     @clans = current_user.clans
     @users = User.all - [current_user]
+    @favours_for_me = current_user.favours_for_me
   end
   
   def users_benefiting

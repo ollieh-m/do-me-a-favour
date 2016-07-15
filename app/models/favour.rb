@@ -27,6 +27,15 @@ class Favour < ActiveRecord::Base
     end
   end
   
+  def status
+    if bids.size > 0
+      return 'Bids pending' if self.bids.all?{|x| x.accepted.nil?}
+      return 'Bid accepted' if self.bids.any?{|x| x.accepted == true}
+    else
+      return 'No bids'
+    end
+  end
+  
   private
   
   def set_error(error_message)

@@ -12,6 +12,13 @@
 
 <div class='favours-i-bidded-on'>
   <% @bidded_on_favours.each do |favour| %>
-    <li><%= favour.description %></li>
+    <li>
+      <%= favour.description %>
+      <p class='status'>
+        <% if favour.status == 'Bids pending' %>
+          Awaiting response to your bid
+        <% end %>
+      </p>
+    </li>
   <% end %>
 </div>
