@@ -29,23 +29,6 @@ describe Favour do
     end
   end
   
-  context '#all_benefiting_others_and_in_clans_of' do
-    it "builds an array of favours found in the user's clans that benefit other users" do
-      user = double(:user)
-      favour1 = double(:favour, users_benefiting: [user,:user2])
-      favour2 = double(:favour, users_benefiting: [user, :user3])
-      favour3 = double(:favour, users_benefiting: [user])
-      clan1 = double(:clan, favours: [favour1, favour2])
-      clan2 = double(:clan, favours: [favour2, favour3])
-      allow(user).to receive(:clans).and_return([clan1,clan2])
-      allow(user).to receive(:favours_bidded_on).and_return([favour2])
-
-      result = Favour.in_clans_of(user: user)
-      
-      expect(result).to eq [favour1]
-    end
-  end
-  
   context '#validate_with' do
     it "adds an error if clans is empty and returns false without saving" do
       favour = Favour.new(description:'Dummy description')

@@ -17,12 +17,6 @@ class Favour < ActiveRecord::Base
     end
   end
   
-  def self.in_clans_of(user:)
-    favours = extract_favours_from_clans_of(user)
-    favours = exclude_favours_only_benefiting(user,favours)
-    exclude_favours_bidded_on_by(user,favours)
-  end
-  
   def validate_with(clans:)
     if(clans.nil? || self.description == '')
       set_error('You need to choose at least one clan') if clans.nil?
@@ -34,22 +28,6 @@ class Favour < ActiveRecord::Base
   end
   
   private
-  
-  def self.extract_favours_from_clans_of(user)
-    favours = []
-    user.clans.each do |clan|
-      favours += clan.favours
-    end
-    favours.uniq
-  end
-  
-  def self.exclude_favours_only_benefiting(user,favours)
-    favours.select{|favour| (favour.users_benefiting - [user]).length > 0}
-  end
-  
-  def self.exclude_favours_bidded_on_by(user,favours)
-    favours - user.favours_bidded_on
-  end
   
   def set_error(error_message)
     @errors.nil? ? @errors = [error_message] : @errors << error_message
