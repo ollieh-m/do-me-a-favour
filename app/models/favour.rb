@@ -19,7 +19,8 @@ class Favour < ActiveRecord::Base
   
   def self.in_clans_of(user:)
     favours = extract_favours_from_clans_of(user)
-    exclude_favours_only_benefiting(user,favours)
+    favours = exclude_favours_only_benefiting(user,favours)
+    exclude_favours_bidded_on_by(user,favours)
   end
   
   def validate_with(clans:)
@@ -44,6 +45,10 @@ class Favour < ActiveRecord::Base
   
   def self.exclude_favours_only_benefiting(user,favours)
     favours.select{|favour| (favour.users_benefiting - [user]).length > 0}
+  end
+  
+  def self.exclude_favours_bidded_on_by(user,favours)
+    favours - user.favours_bidded_on
   end
   
   def set_error(error_message)

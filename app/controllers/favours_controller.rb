@@ -6,7 +6,7 @@ class FavoursController < ApplicationController
   
   def forothersindex
     @bidded_on_favours = current_user.favours_bidded_on
-    @bid_on_favours = Favour.in_clans_of(user: current_user) - @bidded_on_favours
+    @bid_on_favours = Favour.in_clans_of(user: current_user)
     @bid = Bid.new
   end
   

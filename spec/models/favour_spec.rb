@@ -38,10 +38,11 @@ describe Favour do
       clan1 = double(:clan, favours: [favour1, favour2])
       clan2 = double(:clan, favours: [favour2, favour3])
       allow(user).to receive(:clans).and_return([clan1,clan2])
-      
+      allow(user).to receive(:favours_bidded_on).and_return([favour2])
+
       result = Favour.in_clans_of(user: user)
       
-      expect(result).to eq [favour1,favour2]
+      expect(result).to eq [favour1]
     end
   end
   
