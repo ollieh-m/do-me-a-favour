@@ -25,12 +25,7 @@ feature 'User bids to do a favour' do
     end
     scenario "and 'bids waiting on your response' in favours for me'" do
       sign_out
-      click_on 'Sign in'
-      fill_in('Email', with: 'testuser@email.com')
-      fill_in('Password', with: '123456')
-      within(:css, '.sign_in') do
-        click_on 'Sign in'
-      end
+      sign_in
       click_on 'Favours for me'
       expect(page).to have_css('.favours-benefiting-me li p.status', text: 'Bids in waiting on your response')
     end

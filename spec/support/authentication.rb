@@ -15,4 +15,13 @@ module Features
     click_on 'Sign out'
   end
   
+  def sign_in(email: 'testuser@email.com', password: '123456')
+    click_on 'Sign in'
+    fill_in('Email', with: email)
+    fill_in('Password', with: password)
+    within(:css, '.sign_in') do
+      click_on 'Sign in'
+    end
+  end
+  
 end
