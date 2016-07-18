@@ -10,4 +10,12 @@ class Bid < ActiveRecord::Base
       false
     end
   end
+  
+  def validate_acceptance_with(user:)
+    if user.favours_for_me.include?(favour)
+      save
+    else
+      @errors = ['You can only accept a bid on a favour you benefit from']
+    end
+  end
 end
