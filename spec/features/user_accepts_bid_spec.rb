@@ -61,6 +61,6 @@ feature 'User accepts a bid that has been made on a favour' do
     sign_in
     click_on "Testuser's dashboard"
     click_on 'Favours for me'
-    expect(page).not_to have_content 'Accept bid'
+    expect(page).not_to have_button 'Accept bid'
   end
 end

@@ -19,7 +19,7 @@ describe Bid do
       bid = Bid.new(user: user, favour: favour)
       expect(bid.validate).to eq false
       expect(Bid.all.count).to eq 0
-      expect(bid.errors).to eq ['You can only bid on a favour posted to one of your clans that other users will benefit from']
+      expect(bid.errors).to eq ['You can only bid on a favour posted to one of your clans that other users will benefit from - and only if no bid has already been accepted']
     end
   end
     

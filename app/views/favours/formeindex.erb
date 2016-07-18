@@ -33,7 +33,11 @@
         <% favour.bids.each do |bid| %>
           <li id='bid_<%=bid.id%>'>
             <%= bid.amount %>
-            <%= button_to 'Accept bid', "bids/#{bid.id}/accept" %>
+            <% if favour.formeindex_status =~ /accepted/ %>
+              Bid accepted
+            <% else %>
+              <%= button_to 'Accept bid', "bids/#{bid.id}/accept" %>
+            <% end %>
           </li>
         <% end %>
       <% end %>
