@@ -27,16 +27,30 @@ class Favour < ActiveRecord::Base
     end
   end
   
-  def status
-    if bids.size > 0
-      return 'Bids pending' if self.bids.all?{|x| x.accepted.nil?}
-      return 'Bid accepted' if self.bids.any?{|x| x.accepted == true}
+  def forothersindex_status(user:)
+    if self.bids.all?{|x| x.accepted.nil?}
+      'Awaiting response to your bid'
     else
-      return 'No bids'
+      accepted_or_rejected(user)
+    end
+  end
+  
+  def formeindex_status
+    if bids.size > 0
+      return 'Bids in waiting on your response' if self.bids.all?{|x| x.accepted.nil?}
+      return 'A bid has been accepted for this favour' if self.bids.any?{|x| x.accepted == true}
     end
   end
   
   private
+  
+  def accepted_or_rejected(user)
+    if bids.select{|x| x.accepted == true}.first.user == user
+      'Your bid is accepted and awaiting fulfilment'
+    else
+      'Sorry, your bid was rejected'
+    end
+  end
   
   def set_error(error_message)
     @errors.nil? ? @errors = [error_message] : @errors << error_message

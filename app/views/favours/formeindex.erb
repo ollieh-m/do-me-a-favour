@@ -27,10 +27,16 @@
     <li>
       <%= favour.description %>
       <p class='status'>
-        <% if favour.status == 'Bids pending' %>
-          <%= 'Bids in waiting on your response' %>
-        <% end %>
+        <%= favour.formeindex_status %>
       </p>
+      <% unless favour.bids.nil? %>
+        <% favour.bids.each do |bid| %>
+          <li id='bid_<%=bid.id%>'>
+            <%= bid.amount %>
+            <%= button_to 'Accept bid', "bids/#{bid.id}/accept" %>
+          </li>
+        <% end %>
+      <% end %>
     </li>
   <% end %>
 </div>

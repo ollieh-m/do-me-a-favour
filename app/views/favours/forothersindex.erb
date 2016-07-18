@@ -1,4 +1,9 @@
 <div class='favours-i-can-bid-on'>
+  <% unless flash[:errors].nil? %>
+    <% flash[:errors].each do |error| %>
+      <li><%= error %></li>
+    <% end %>
+  <% end %>
   <% @bid_on_favours.each do |favour| %>
     <li><%= favour.description %>
       <%= form_for [favour, @bid] do |f| %>
@@ -15,9 +20,7 @@
     <li>
       <%= favour.description %>
       <p class='status'>
-        <% if favour.status == 'Bids pending' %>
-          Awaiting response to your bid
-        <% end %>
+        <%= favour.forothersindex_status(user: current_user) %>
       </p>
     </li>
   <% end %>

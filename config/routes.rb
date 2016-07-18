@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   resources :favours, only: [:create] do
     resources :bids, only: [:create]
   end
+  
+  #accept
+  post 'bids/:bid_id/accept' => 'accepts#create'
     
   get 'favoursforme' => 'favours#formeindex'
   get 'favoursforothers' => 'favours#forothersindex'

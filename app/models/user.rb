@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   
   def favours_to_bid_on
     favours_array = extract_favours_from_clans
+    favours_array = exclude_favours_with_accepted_bid(favours_array)
     favours_array = exclude_favours_not_benefiting_others(favours_array)
     exclude_favours_user_has_bidded_on(favours_array)
   end
@@ -25,6 +26,10 @@ class User < ActiveRecord::Base
       favours_array += clan.favours
     end
     favours_array.uniq
+  end
+  
+  def exclude_favours_with_accepted_bid(favours_array)
+    favours_array.select{|favour| favour.bids.all?{|x| x.accepted.nil?} }
   end
   
   def exclude_favours_not_benefiting_others(favours_array)

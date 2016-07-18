@@ -11,11 +11,15 @@ describe User do
     it "builds an array of favours found in the user's clans that benefit other users" do
       user = User.create(username: 'Test', email: 'test@email.com', password_digest: '123456')
       
-      favour1 = double(:favour, users_benefiting: [user,:user2])
-      favour2 = double(:favour, users_benefiting: [user, :user3])
-      favour3 = double(:favour, users_benefiting: [user])
+      bid1 = double(:bid, accepted: nil)
+      bid2 = double(:bid, accepted: true)
       
-      clan1 = double(:clan, favours: [favour1, favour2])
+      favour1 = double(:favour, bids: [bid1], users_benefiting: [user,:user2])
+      favour2 = double(:favour, bids: [bid1], users_benefiting: [user, :user3])
+      favour3 = double(:favour, bids: [bid1], users_benefiting: [user])
+      favour4 = double(:favour, bids: [bid1, bid2], users_benefiting: [user, :user2])
+      
+      clan1 = double(:clan, favours: [favour1, favour2, favour4])
       clan2 = double(:clan, favours: [favour2, favour3])
       
       allow_any_instance_of(User).to receive(:clans).and_return([clan1,clan2])
