@@ -2,9 +2,10 @@ class BidsController < ApplicationController
   
   def create
     bid = Bid.new(bid_params)
-    if bid.save
-      redirect_to request.referer
+    unless bid.validate
+      flash[:errors] = bid.errors
     end
+    redirect_to request.referer
   end
   
   private
