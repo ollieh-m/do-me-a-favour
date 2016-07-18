@@ -57,7 +57,9 @@ describe Favour do
     let(:current_user){ User.create(username: 'Test', email: 'test@email.com', password_digest: '123456') }
     let(:other_user){ User.create(username: 'Test2', email: 'test2@email.com', password_digest: '123456') }
     
-    let(:favour){ Favour.create(description: 'Test') }
+    let(:favour1){ Favour.create(description: 'Test') }
+    let(:favour2){ Favour.create(description: 'Test', completed: 'Confirmed') }
+    
     let(:bid1){ double(:bid, accepted: nil) }
     let(:bid2){ double(:bid, accepted: nil) }
     let(:bid3){ double(:bid, accepted: true, user: current_user) }
@@ -65,36 +67,48 @@ describe Favour do
     
     it "returns 'awaiting response to your bid' if the favour has bids in but none have been accepted" do
       allow_any_instance_of(Favour).to receive(:bids).and_return([bid1,bid2])
-      result = favour.forothersindex_status(user: current_user)
+      result = favour1.forothersindex_status(user: current_user)
       expect(result).to eq 'Awaiting response to your bid'
     end
-    it "returns 'Your bid is accepted and awaiting fulfilment' if your bid is accepted" do
+    it "returns 'Your bid is accepted and awaiting fulfilment' if your bid is accepted but not completed" do
       allow_any_instance_of(Favour).to receive(:bids).and_return([bid1,bid3])
-      result = favour.forothersindex_status(user: current_user)
+      result = favour1.forothersindex_status(user: current_user)
       expect(result).to eq 'Your bid is accepted and awaiting fulfilment'
+    end
+    it "returns 'Nice one - you did this favour' if your bid is accepted and completed" do
+      allow_any_instance_of(Favour).to receive(:bids).and_return([bid1,bid3])
+      result = favour2.forothersindex_status(user: current_user)
+      expect(result).to eq 'Nice one - you did this favour'
     end
     it "returns 'Sorry, your bid was rejected' if the favour has no bids in" do
       allow_any_instance_of(Favour).to receive(:bids).and_return([bid1,bid4])
-      result = favour.forothersindex_status(user: current_user)
+      result = favour1.forothersindex_status(user: current_user)
       expect(result).to eq 'Sorry, your bid was rejected'
     end
   end
   
   context '#formeindex_status' do
-    let(:favour){ Favour.create(description: 'Test') }
+    let(:favour1){ Favour.create(description: 'Test') }
+    let(:favour2){ Favour.create(description: 'Test', completed: 'Confirmed') }
+    
     let(:bid1){ double(:bid, accepted: nil) }
     let(:bid2){ double(:bid, accepted: nil) }
     let(:bid3){ double(:bid, accepted: true) }
 
     it "returns 'Bids in waiting on your response' if the favour has bids in but none have been accepted" do
       allow_any_instance_of(Favour).to receive(:bids).and_return([bid1,bid2])
-      result = favour.formeindex_status
+      result = favour1.formeindex_status
       expect(result).to eq 'Bids in waiting on your response'
     end
-    it "returns 'A bid has been accepted for this favour' if your bid is accepted" do
+    it "returns 'A bid has been accepted for this favour' if a bid is accepted but not complete" do
       allow_any_instance_of(Favour).to receive(:bids).and_return([bid1,bid3])
-      result = favour.formeindex_status
+      result = favour1.formeindex_status
       expect(result).to eq 'A bid has been accepted for this favour'
+    end
+    it "returns 'This favour has been carried out' if a favour is complete" do
+      allow_any_instance_of(Favour).to receive(:bids).and_return([bid1,bid3])
+      result = favour2.formeindex_status
+      expect(result).to eq 'This favour has been carried out'
     end
   end
 

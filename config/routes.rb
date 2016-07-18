@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   #favours
   resources :favours, only: [:create] do
     resources :bids, only: [:create]
+    resource :completion, only: [:create]
   end
   
   #accept

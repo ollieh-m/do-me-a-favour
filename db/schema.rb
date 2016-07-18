@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160715084702) do
+ActiveRecord::Schema.define(version: 20160718160804) do
 
   create_table "bids", force: :cascade do |t|
     t.integer  "favour_id"
@@ -48,7 +48,10 @@ ActiveRecord::Schema.define(version: 20160715084702) do
     t.string   "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "completed"
   end
+
+  add_index "favours", ["completed"], name: "index_favours_on_completed"
 
   create_table "user_clan_relationships", force: :cascade do |t|
     t.datetime "created_at", null: false

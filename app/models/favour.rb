@@ -37,8 +37,13 @@ class Favour < ActiveRecord::Base
   
   def formeindex_status
     if bids.size > 0
-      return 'Bids in waiting on your response' if self.bids.all?{|x| x.accepted.nil?}
-      return 'A bid has been accepted for this favour' if self.bids.any?{|x| x.accepted == true}
+      if completed == 'Confirmed'
+        'This favour has been carried out'
+      elsif bids.any?{|x| x.accepted == true}
+        'A bid has been accepted for this favour'
+      else 
+        'Bids in waiting on your response'
+      end
     end
   end
   
@@ -46,9 +51,17 @@ class Favour < ActiveRecord::Base
   
   def accepted_or_rejected(user)
     if bids.select{|x| x.accepted == true}.first.user == user
-      'Your bid is accepted and awaiting fulfilment'
+      completed_or_awaiting_fulfilment
     else
       'Sorry, your bid was rejected'
+    end
+  end
+  
+  def completed_or_awaiting_fulfilment
+    if completed == 'Confirmed'
+      'Nice one - you did this favour'
+    else
+      'Your bid is accepted and awaiting fulfilment'
     end
   end
   

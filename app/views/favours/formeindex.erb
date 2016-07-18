@@ -35,7 +35,13 @@
           <li id='bid_<%=bid.id%>'>
             <%= bid.amount %>
             <% if favour.formeindex_status =~ /accepted/ %>
-              Bid accepted
+              <% if bid.accepted %>
+                <%= button_to "#{bid.user.username} has done this favour", favour_completion_path(favour) %>
+              <% end %>
+            <% elsif favour.formeindex_status =~ /carried/ %>
+              <% if bid.accepted %>
+                <%= bid.user.username %> did the favour
+              <% end %>
             <% else %>
               <%= button_to 'Accept bid', "bids/#{bid.id}/accept" %>
             <% end %>
