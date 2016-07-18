@@ -7,8 +7,8 @@ class UsersController < ApplicationController
 
   def create
     @user = sign_up(user_params)
-
     if @user.valid?
+      @user.update(thankyoupoints: 100)
       sign_in(@user)
       redirect_to root_path
     else
