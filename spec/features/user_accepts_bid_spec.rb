@@ -5,7 +5,7 @@ feature 'User accepts a bid that has been made on a favour' do
     click_on "Testuser's dashboard"
     click_on 'Favours for me'
     check 'clan_1'
-    fill_in('Description', with: 'The washing up')
+    fill_in('Next, describe the favour...', with: 'The washing up')
     click_on 'Request help'
     sign_out
     sign_up(username: 'Testuser2', email:'testuser2@email.com')

@@ -8,7 +8,7 @@ feature 'User posts a favour just for themself' do
     click_on 'Favours for me'
     check 'clan_1'
     check 'clan_2'
-    fill_in('Description', with: 'The washing up')
+    fill_in('Next, describe the favour...', with: 'The washing up')
     click_on 'Request help'
     sign_out
     sign_up(username: 'Testuser2', email:'testuser2@email.com')
@@ -27,7 +27,7 @@ feature 'User posts a favour just for themself' do
     click_on 'Favours for me'
     check 'clan_1'
     check 'clan_2'
-    fill_in('Description', with: 'The washing up')
+    fill_in('Next, describe the favour...', with: 'The washing up')
     click_on 'Request help'
     click_on "Testuser's dashboard"
     click_on 'Favours for others'
@@ -44,7 +44,7 @@ feature 'User posts a favour for themself and another user' do
     click_on "Testuser's dashboard"
     click_on 'Favours for me'
     check 'clan_1'
-    fill_in('Description', with: 'The washing up')
+    fill_in('Next, describe the favour...', with: 'The washing up')
     select('Testuser2', from: 'users_benefiting')
     click_on 'Request help'
     click_on "Testuser's dashboard"
@@ -60,7 +60,7 @@ feature 'User posts an invalid favour' do
     click_on "Testuser's dashboard"
     click_on 'Favours for me'
     check 'clan_1'
-    fill_in('Description', with: '')
+    fill_in('Next, describe the favour...', with: '')
     click_on 'Request help'
     expect(page).to have_content("Description can't be blank")
     sign_out
@@ -77,7 +77,7 @@ feature 'User posts an invalid favour' do
     create_clan(name: '3 Greenway Road', description: 'Home')
     click_on "Testuser's dashboard"
     click_on 'Favours for me'
-    fill_in('Description', with: 'The washing up')
+    fill_in('Next, describe the favour...', with: 'The washing up')
     click_on 'Request help'
     expect(page).to have_content('You need to choose at least one clan')
     sign_out

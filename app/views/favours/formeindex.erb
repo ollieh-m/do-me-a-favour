@@ -4,24 +4,26 @@
   <% end %>
 <% end %>
 
-<%= form_tag :favours do |f| %>
-  Choose clans to post favour in...
-  <% @clans.each do |clan| %>
-    <div>
-      <%= label_tag("clan[#{clan.id}]".to_sym, clan.name) %>
-      <%= check_box_tag("clan[#{clan.id}]".to_sym) %>
+<div class='form-box'>
+  <%= form_tag :favours do |f| %>
+    <div id='first_step'>
+      <h3>To post a new favour, first choose clans to post the favour in...</h3>
+      <% @clans.each do |clan| %>
+        <%= label_tag("clan[#{clan.id}]".to_sym, clan.name) %>
+        <%= check_box_tag("clan[#{clan.id}]".to_sym) %>
+      <% end %>
     </div>
+    <div id='second_step'>
+      <%= label_tag(:description, "Next, describe the favour...") %>
+      <%= text_area_tag(:description, nil, rows: 5) %>
+    </div>
+    <div id='third_step'>
+      <h3>Choose anyone else this favour is for...</h3>
+      <%= select_tag(:users_benefiting, options_from_collection_for_select(@users,:id,:username), {multiple: true}) %>
+    </div>
+    <%= submit_tag("Request help", class: 'help-button') %>
   <% end %>
-  <div>
-    <%= label_tag(:description, "Description") %>
-    <%= text_field_tag(:description) %>
-  </div>
-  <div>
-    Choose anyone else you this favour is for...
-    <%= select_tag(:users_benefiting, options_from_collection_for_select(@users,:id,:username), {multiple: true}) %>
-  </div>
-  <%= submit_tag("Request help") %>
-<% end %>
+</div>
 
 <div class='favours-benefiting-me'>
   <% @favours_for_me.each do |favour| %>

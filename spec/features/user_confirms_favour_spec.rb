@@ -9,7 +9,7 @@ feature 'User confirms a favour has been carried out' do
     click_on 'Favours for me'
     check 'clan_1'
     select('Testuser2', from: 'users_benefiting')
-    fill_in('Description', with: 'The washing up')
+    fill_in('Next, describe the favour...', with: 'The washing up')
     click_on 'Request help'
     sign_out
     
