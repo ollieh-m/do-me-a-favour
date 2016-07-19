@@ -34,7 +34,7 @@
 <% if @favours_for_me %>
   <div class='favours-benefiting-me'>
     <h1>Favours that'll help me...</h1>
-    <% @favours_for_me.each do |favour| %>
+    <ul><% @favours_for_me.each do |favour| %>
       <li>
         <%= favour.description %>
         <p class='status'>
@@ -60,5 +60,6 @@
         <% end %>
       </li>
     <% end %>
+    </ul>
   </div>
 <% end %>
