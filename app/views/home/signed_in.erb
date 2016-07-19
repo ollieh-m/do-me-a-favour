@@ -1,3 +1,16 @@
-<%= link_to "Manage my clans", clans_path %>
-<%= link_to "Favours for me", '/favoursforme' %>
-<%= link_to "Favours for others", '/favoursforothers' %>
+<div class='feature-box'>
+  <h1>Welcome to Do Me A Favour,</h1>
+  <h2>where your chores get done fairly and efficiently...</h2>
+</div>
+
+<div class='row'>
+  <div class='col-md-4'>
+    <%= link_to "Manage my clans", clans_path, class: 'feature-button' %>
+  </div>
+  <div class='col-md-4'>
+    <%= link_to "Favours for me", '/favoursforme', class: 'feature-button' %>
+  </div>
+  <div class='col-md-4'>
+    <%= link_to "Favours for others", '/favoursforothers', class: 'feature-button' %>
+  </div
+</div>
