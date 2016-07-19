@@ -24,8 +24,8 @@
       <div class='col-md-4'>
         <%= select_tag(:users_benefiting, options_from_collection_for_select(@users,:id,:username), {multiple: true}) %>
       </div>
+      <%= submit_tag("Request help", class: 'help-button') %>
     </div>
-    <%= submit_tag("Request help", class: 'help-button') %>
   <% end %>
 </div>
 
