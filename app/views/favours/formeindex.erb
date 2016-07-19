@@ -31,31 +31,34 @@
   <% end %>
 </div>
 
-<div class='favours-benefiting-me'>
-  <% @favours_for_me.each do |favour| %>
-    <li>
-      <%= favour.description %>
-      <p class='status'>
-        <%= favour.formeindex_status %>
-      </p>
-      <% unless favour.bids.nil? %>
-        <% favour.bids.each do |bid| %>
-          <li id='bid_<%=bid.id%>'>
-            <%= bid.amount %>
-            <% if favour.formeindex_status =~ /accepted/ %>
-              <% if bid.accepted %>
-                <%= button_to "#{bid.user.username} has done this favour", favour_completion_path(favour) %>
+<% if @favours_for_me %>
+  <div class='favours-benefiting-me'>
+    <h1>Favours that'll help me...</h1>
+    <% @favours_for_me.each do |favour| %>
+      <li>
+        <%= favour.description %>
+        <p class='status'>
+          <%= favour.formeindex_status %>
+        </p>
+        <% unless favour.bids.nil? %>
+          <% favour.bids.each do |bid| %>
+            <li id='bid_<%=bid.id%>'>
+              <%= bid.amount %>
+              <% if favour.formeindex_status =~ /accepted/ %>
+                <% if bid.accepted %>
+                  <%= button_to "#{bid.user.username} has done this favour", favour_completion_path(favour) %>
+                <% end %>
+              <% elsif favour.formeindex_status =~ /carried/ %>
+                <% if bid.accepted %>
+                  <%= bid.user.username %> did the favour
+                <% end %>
+              <% else %>
+                <%= button_to 'Accept bid', "bids/#{bid.id}/accept" %>
               <% end %>
-            <% elsif favour.formeindex_status =~ /carried/ %>
-              <% if bid.accepted %>
-                <%= bid.user.username %> did the favour
-              <% end %>
-            <% else %>
-              <%= button_to 'Accept bid', "bids/#{bid.id}/accept" %>
-            <% end %>
-          </li>
+            </li>
+          <% end %>
         <% end %>
-      <% end %>
-    </li>
-  <% end %>
-</div>
+      </li>
+    <% end %>
+  </div>
+<% end %>

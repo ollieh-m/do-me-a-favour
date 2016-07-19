@@ -14,7 +14,7 @@
  * file per style scope.
  *
  */
- 
+
 html { 
   background: url('dark-black-website-background.jpg') no-repeat center center fixed; 
   -webkit-background-size: cover;
@@ -109,3 +109,10 @@ body, .container {
   text-decoration: none;
 }
 
+.favours-benefiting-me {
+  border: 5px solid white;
+  padding: 3px 10px;
+  color: black;
+  background-color: white;
+  margin: 50px 0 10px 0;
+}
