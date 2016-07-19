@@ -16,6 +16,7 @@ class Bid < ActiveRecord::Base
       save
     else
       @errors = ['You can only accept a bid on a favour you benefit from']
+      false
     end
   end
 end

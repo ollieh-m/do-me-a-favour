@@ -27,6 +27,21 @@ class Favour < ActiveRecord::Base
     end
   end
   
+  def validate_completion_with(user:)
+    if users_benefiting.include?(user)
+      save
+    else
+      @errors = ['You can only confirm completion of a favour if you benefit from the favour']
+      false
+    end
+  end
+  
+  def exchange_thankyou_points
+    bid = bids.select{|x| x.accepted }.first
+    add_points(bid)
+    subtract_points(bid)
+  end
+  
   def forothersindex_status(user:)
     if self.bids.all?{|x| x.accepted.nil?}
       'Awaiting response to your bid'
@@ -82,6 +97,18 @@ class Favour < ActiveRecord::Base
       users_benefiting.each do |user|
         favour.user_favour_relationships.build(user: user)
       end
+    end
+  end
+  
+  def add_points(bid)
+    bid.user.thankyoupoints += bid.amount
+    bid.user.save
+  end
+  
+  def subtract_points(bid)
+    users_benefiting.each do |user|
+      user.thankyoupoints -= (bid.amount / users_benefiting.length)
+      user.save
     end
   end
   

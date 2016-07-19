@@ -53,6 +53,25 @@ describe Favour do
     end
   end
   
+  context '#validate_completion_with' do
+    it 'saves the updated favour if the favour benefits the specified user' do
+      favour = Favour.new(description: 'Test', completed: 'Confirmed')
+      user = double(:user)
+      allow_any_instance_of(Favour).to receive(:users_benefiting).and_return([user])
+      result = favour.validate_completion_with(user: user)
+      expect(result).to eq true
+      expect(Favour.all.count).to eq 1
+    end
+    it 'saves the updated favour if the favour benefits the specified user' do
+      favour = Favour.new(description: 'Test', completed: 'Confirmed')
+      user = double(:user)
+      allow_any_instance_of(Favour).to receive(:users_benefiting).and_return([])
+      result = favour.validate_completion_with(user: user)
+      expect(result).to eq false
+      expect(Favour.all.count).to eq 0
+    end
+  end
+  
   context '#forothersindex_status' do
     let(:current_user){ User.create(username: 'Test', email: 'test@email.com', password_digest: '123456') }
     let(:other_user){ User.create(username: 'Test2', email: 'test2@email.com', password_digest: '123456') }
