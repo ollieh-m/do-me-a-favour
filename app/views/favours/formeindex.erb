@@ -17,9 +17,13 @@
       <%= label_tag(:description, "Next, describe the favour...") %>
       <%= text_area_tag(:description, nil, rows: 5) %>
     </div>
-    <div id='third_step'>
-      <h3>Choose anyone else this favour is for...</h3>
-      <%= select_tag(:users_benefiting, options_from_collection_for_select(@users,:id,:username), {multiple: true}) %>
+    <div id='third_step' class='row'>
+      <div class='col-md-8'>
+        <h3>Choose anyone else this favour is for...</h3>
+      </div>
+      <div class='col-md-4'>
+        <%= select_tag(:users_benefiting, options_from_collection_for_select(@users,:id,:username), {multiple: true}) %>
+      </div>
     </div>
     <%= submit_tag("Request help", class: 'help-button') %>
   <% end %>
