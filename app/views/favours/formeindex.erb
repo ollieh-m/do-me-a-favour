@@ -31,7 +31,7 @@
   <% end %>
 </div>
 
-<% if @favours_for_me %>
+<% if @favours_for_me.count > 0 %>
   <div class='favours-benefiting-me'>
     <h1>Favours that'll help me...</h1>
     <ul><% @favours_for_me.each do |favour| %>

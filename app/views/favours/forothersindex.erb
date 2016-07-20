@@ -4,17 +4,25 @@
   <% end %>
 <% end %>
 
-<div class='favours-i-can-bid-on'>
-  <% @bid_on_favours.each do |favour| %>
-    <li><%= favour.description %>
-      <%= form_for [favour, @bid] do |f| %>
-        <%= f.label :amount, "Number of thank you points" %>
-        <%= f.number_field(:amount, in: 1.0..100.0) %>
-        <%= f.submit "Bid" %>
-      <% end %>
-    </li>
-  <% end %>
-</div>
+<% if @bid_on_favours.count > 0 %>
+  <div class='favours-i-can-bid-on form-box'>
+    <h1>Favours I can bid on...</h1>
+    <ul><% @bid_on_favours.each do |favour| %>
+      <li class='row'>
+        <div class='col-md-4'>
+          <%= favour.description %>
+        </div>
+        <div class='col-md-8'>
+          <%= form_for [favour, @bid] do |f| %>
+            <%= f.label :amount, "Number of thank you points" %>
+            <%= f.number_field(:amount, in: 1.0..100.0) %>
+            <%= f.submit "Bid", class: 'bid-button' %>
+          <% end %>
+        </div>
+      </li>
+    <% end %></ul>
+  </div>
+<% end %>
 
 <div class='favours-i-bidded-on'>
   <% @bidded_on_favours.each do |favour| %>
