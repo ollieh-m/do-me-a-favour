@@ -21,13 +21,13 @@ feature 'User bids to do a favour' do
   end
   context "and the favour has a 'bids pending' status" do
     scenario "displayed as 'bid awaiting response' in 'favours I have bidded for'" do 
-      expect(page).to have_css('.favours-i-bidded-on li p.status', text: 'Awaiting response to your bid')
+      expect(page).to have_css('.favours-i-bidded-on li div.status', text: 'Awaiting response to your bid')
     end
     scenario "and 'bids waiting on your response' in favours for me'" do
       sign_out
       sign_in
       click_on 'Favours for me'
-      expect(page).to have_css('.favours-benefiting-me li p.status', text: 'Bids in waiting on your response')
+      expect(page).to have_css('.favours-benefiting-me li div.status', text: 'Bids in waiting on your response')
     end
   end
 end

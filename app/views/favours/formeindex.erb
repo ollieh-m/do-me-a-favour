@@ -35,31 +35,38 @@
   <div class='favours-benefiting-me'>
     <h1>Favours that'll help me...</h1>
     <ul><% @favours_for_me.each do |favour| %>
-      <li>
-        <%= favour.description %>
-        <p class='status'>
+      <li class='row favour-level'>
+        <div class='col-md-3'>
+          <%= favour.description %>
+        </div>
+        <div class='status col-md-3'>
           <%= favour.formeindex_status %>
-        </p>
-        <% unless favour.bids.nil? %>
-          <% favour.bids.each do |bid| %>
-            <li id='bid_<%=bid.id%>'>
-              <%= bid.amount %>
-              <% if favour.formeindex_status =~ /accepted/ %>
-                <% if bid.accepted %>
-                  <%= button_to "#{bid.user.username} has done this favour", favour_completion_path(favour) %>
-                <% end %>
-              <% elsif favour.formeindex_status =~ /carried/ %>
-                <% if bid.accepted %>
-                  <%= bid.user.username %> did the favour
-                <% end %>
-              <% else %>
-                <%= button_to 'Accept bid', "bids/#{bid.id}/accept" %>
-              <% end %>
-            </li>
+        </div>
+        <div class='col-md-6'>
+          <% unless favour.bids.nil? %>
+            <ul><% favour.bids.each do |bid| %>
+              <li id='bid_<%=bid.id%>' class='row'>
+                <div class='col-md-6'>
+                  <%= "#{bid.user.username} bidded #{bid.amount}" %>
+                </div>
+                <div class='col-md-6'>
+                  <% if favour.formeindex_status =~ /accepted/ %>
+                    <% if bid.accepted %>
+                      <%= button_to "#{bid.user.username} has done this favour", favour_completion_path(favour) %>
+                    <% end %>
+                  <% elsif favour.formeindex_status =~ /carried/ %>
+                    <% if bid.accepted %>
+                      <%= bid.user.username %> did the favour
+                    <% end %>
+                  <% else %>
+                    <%= button_to 'Accept bid', "bids/#{bid.id}/accept" %>
+                  <% end %>
+                </div>
+              </li>
+            <% end %></ul>
           <% end %>
-        <% end %>
+        </div>
       </li>
-    <% end %>
-    </ul>
+    <% end %></ul>
   </div>
 <% end %>

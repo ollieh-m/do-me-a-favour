@@ -37,12 +37,12 @@ feature 'User confirms a favour has been carried out' do
   scenario "and status appears as 'Nice one - you did this favour' if the user's bid had been accepted" do
     sign_in(email: 'testuser3@email.com', password: '123456')
     click_on 'Favours for others'
-    expect(page).to have_css('.favours-i-bidded-on li p.status', text: 'Nice one - you did this favour')
+    expect(page).to have_css('.favours-i-bidded-on li div.status', text: 'Nice one - you did this favour')
   end
   scenario "and status appears as 'This favour has been carried out' if the favour benefited you" do
     sign_in
     click_on 'Favours for me'
-    expect(page).to have_css('.favours-benefiting-me li p.status', text: 'This favour has been carried out')
+    expect(page).to have_css('.favours-benefiting-me li div.status', text: 'This favour has been carried out')
   end
   context "and Thank you points are exchanged" do
     scenario '- the user who made the accepted bid gains the specified thank you points' do

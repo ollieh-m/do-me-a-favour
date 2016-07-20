@@ -20,9 +20,9 @@
   <% @bidded_on_favours.each do |favour| %>
     <li>
       <%= favour.description %>
-      <p class='status'>
+      <div class='status'>
         <%= favour.forothersindex_status(user: current_user) %>
-      </p>
+      </div>
     </li>
   <% end %>
 </div>

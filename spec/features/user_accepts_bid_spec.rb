@@ -36,17 +36,17 @@ feature 'User accepts a bid that has been made on a favour' do
     scenario "which displays as 'your bid is accepted' in the forothersindex if it is the user's bid" do
       sign_in(email: 'testuser2@email.com', password: '123456')
       click_on 'Favours for others'
-      expect(page).to have_css('.favours-i-bidded-on li p.status', text: 'Your bid is accepted and awaiting fulfilment')
+      expect(page).to have_css('.favours-i-bidded-on li div.status', text: 'Your bid is accepted and awaiting fulfilment')
     end
     scenario "which displays as 'your bid is rejected' in the forothersindex if it is another user's bid" do
       sign_in(email: 'testuser3@email.com', password: '123456')
       click_on 'Favours for others'
-      expect(page).to have_css('.favours-i-bidded-on li p.status', text: 'Sorry, your bid was rejected')
+      expect(page).to have_css('.favours-i-bidded-on li div.status', text: 'Sorry, your bid was rejected')
     end
     scenario "which displays as 'a bid has been accepted for this favour' in the formeindex" do
       sign_in
       click_on 'Favours for me'
-      expect(page).to have_css('.favours-benefiting-me li p.status', text: 'A bid has been accepted for this favour')
+      expect(page).to have_css('.favours-benefiting-me li div.status', text: 'A bid has been accepted for this favour')
     end
   end
   scenario "and users cannot submit other bids on the favour" do
