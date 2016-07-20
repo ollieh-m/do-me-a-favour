@@ -52,14 +52,14 @@
                 <div class='col-md-6'>
                   <% if favour.formeindex_status =~ /accepted/ %>
                     <% if bid.accepted %>
-                      <%= button_to "#{bid.user.username} has done this favour", favour_completion_path(favour) %>
+                      <%= button_to "#{bid.user.username} has done this favour", favour_completion_path(favour), class: 'favour-button' %>
                     <% end %>
                   <% elsif favour.formeindex_status =~ /carried/ %>
                     <% if bid.accepted %>
                       <%= bid.user.username %> did the favour
                     <% end %>
                   <% else %>
-                    <%= button_to 'Accept bid', "bids/#{bid.id}/accept" %>
+                    <%= button_to 'Accept bid', "bids/#{bid.id}/accept", class: 'favour-button' %>
                   <% end %>
                 </div>
               </li>
