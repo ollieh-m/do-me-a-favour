@@ -25,7 +25,7 @@ feature 'User signs up and creates invalid clan' do
     sign_up
     create_clan(name: '3 Greenway Road', description: 'home')
     fill_in('Name', with: '3 Greenway Road')
-    fill_in('Description', with: 'home')
+    fill_in('Then describe the clan', with: 'home')
     click_on('Create new clan')
     expect(page).to have_content('Name has already been taken')
   end

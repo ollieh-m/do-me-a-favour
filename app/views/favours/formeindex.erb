@@ -6,18 +6,18 @@
 
 <div class='form-box'>
   <%= form_tag :favours do |f| %>
-    <div id='first_step'>
+    <div id='help_first_step'>
       <h3>To post a new favour, first choose clans to post the favour in...</h3>
       <% @clans.each do |clan| %>
         <%= label_tag("clan[#{clan.id}]".to_sym, clan.name) %>
         <%= check_box_tag("clan[#{clan.id}]".to_sym) %>
       <% end %>
     </div>
-    <div id='second_step'>
+    <div id='help_second_step'>
       <%= label_tag(:description, "Next, describe the favour...") %>
       <%= text_area_tag(:description, nil, rows: 5) %>
     </div>
-    <div id='third_step' class='row'>
+    <div id='help_third_step' class='row'>
       <div class='col-md-6'>
         <h3>Choose anyone else this favour is for...</h3>
       </div>
@@ -25,14 +25,14 @@
         <%= select_tag(:users_benefiting, options_from_collection_for_select(@users,:id,:username), {multiple: true}) %>
       </div>
     </div>
-    <div id='fourth_step'>
+    <div id='help_fourth_step'>
       <%= submit_tag("Request help", class: 'help-button') %>
     </div>
   <% end %>
 </div>
 
 <% if @favours_for_me.count > 0 %>
-  <div class='favours-benefiting-me'>
+  <div class='favours-benefiting-me summary'>
     <h1>Favours that'll help me...</h1>
     <ul><% @favours_for_me.each do |favour| %>
       <li class='row favour-level'>

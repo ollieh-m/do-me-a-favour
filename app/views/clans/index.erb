@@ -1,3 +1,26 @@
+<% unless flash[:errors].nil? %>
+  <% flash[:errors].each do |error| %>
+    <li><%= error %></li>
+  <% end %>
+<% end %>
+
+<div class='form-box'>
+  <%= form_for @clan do |f| %>
+    <div id='clan_first_step'>
+      <h3>To create a new clan, first give it a name...</h3>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+    <div id='clan_second_step'>
+      <%= f.label(:description, "Then describe the clan...") %>
+      <%= f.text_area(:description, rows: 5) %>
+    </div>
+    <div id='clan_third_step'>
+      <%= f.submit "Create new clan", class: 'help-button' %>
+    </div>
+  <% end %>
+</div>
+
 <div class='myclans'>
   <% unless @myclans.nil? %>
     <% @myclans.each do |clan| %>
@@ -19,16 +42,3 @@
     <% end %>
   <% end %>
 </div>
-
-<%= form_for @clan do |f| %>
-  <% unless flash[:errors].nil? %>
-    <% flash[:errors].each do |error| %>
-      <li><%= error %></li>
-    <% end %>
-  <% end %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.label :description %>
-  <%= f.text_field :description %>
-  <%= f.submit "Create new clan" %>
-<% end %>

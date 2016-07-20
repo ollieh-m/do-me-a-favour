@@ -24,13 +24,18 @@
   </div>
 <% end %>
 
-<div class='favours-i-bidded-on'>
-  <% @bidded_on_favours.each do |favour| %>
-    <li>
-      <%= favour.description %>
-      <div class='status'>
-        <%= favour.forothersindex_status(user: current_user) %>
-      </div>
-    </li>
-  <% end %>
-</div>
+<% if @bidded_on_favours.count > 0 %>
+  <div class='favours-i-bidded-on summary'>
+    <h1>Favours I've bidded on...</h1>
+    <ul><% @bidded_on_favours.each do |favour| %>
+      <li class='row favour-level'>
+        <div class='col-md-6'>
+          <%= favour.description %>
+        </div>
+        <div class='status col-md-6'>
+          <%= favour.forothersindex_status(user: current_user) %>
+        </div>
+      </li>
+    <% end %></ul>
+  </div>
+<% end %>

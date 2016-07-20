@@ -72,7 +72,7 @@ body, .container {
     color: black;
     margin-left: 3px;
   }
-  #first_step {
+  #help_first_step {
     label {
       font-size: 150%;
     }
@@ -82,7 +82,7 @@ body, .container {
       margin-right: 10px;
     }
   }
-  #second_step {
+  #help_second_step {
     label {
       font-size: 175%;
       margin: 0;
@@ -93,7 +93,7 @@ body, .container {
       margin-bottom: 7px;
     }
   }
-  #third_step {
+  #help_third_step {
     h3 {
       display: inline-block;
     }
@@ -102,6 +102,25 @@ body, .container {
       width: 100%;
       font-size: 100%;
       margin-bottom: 10px;
+    }
+  }
+  #clan_first_step {
+    label {
+      font-size: 150%;
+    }
+    input {
+      color: black;
+    }
+  }
+  #clan_second_step {
+    label {
+      font-size: 175%;
+      margin: 0;
+    }
+    textarea {
+      width: 100%;
+      color: black;
+      margin-bottom: 7px;
     }
   }
 }
@@ -124,7 +143,7 @@ body, .container {
   text-decoration: none;
 }
 
-.favours-benefiting-me {
+.summary {
   border: 5px solid white;
   padding: 3px 10px;
   color: black;
@@ -138,12 +157,14 @@ body, .container {
   }
   .favour-level {
     border-bottom: 1px dotted black;
+    vertical-align: middle;
   }
 }
 
 .favour-button {
   width: 100%;
-  padding: 5px;
+  margin: 3px 0;
+  padding: 2px;
   border: 5px solid black;
   color: white;
   text-align: center;
