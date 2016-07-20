@@ -21,24 +21,28 @@
   <% end %>
 </div>
 
-<div class='myclans'>
+<div class='myclans summary'>
   <% unless @myclans.nil? %>
-    <% @myclans.each do |clan| %>
-      <li>
-        <%= clan.name %>
-        <%= clan.description %>
-        <%= button_to "Leave #{clan.name}", clan_join_path(clan), method: :delete %>
+    <h1>Clans I am in...</h1>
+    <ul><% @myclans.each do |clan| %>
+      <li class='row top-level'>
+        <div class='col-md-4'><%= clan.name %></div>
+        <div class='col-md-4'><%= clan.description %></div>
+        <div class='col-md-4'><%= button_to "Leave #{clan.name}", clan_join_path(clan), {method: :delete, class: 'favour-button'} %></div>
       </li>
-    <% end %>
+    <% end %></ul>
   <% end %>
 </div>
 
-<div class='otherclans'>
+<div class='otherclans summary'>
   <% unless @otherclans.nil? %>
-    <% @otherclans.each do |clan| %>
-      <li>
-        <%= button_to "Join #{clan.name}", clan_join_path(clan) %>
+    <h1>Clans I'm not in...</h1>
+    <ul><% @otherclans.each do |clan| %>
+      <li class='row top-level'>
+        <div class='col-md-4'><%= clan.name %></div>
+        <div class='col-md-4'><%= clan.description %></div>
+        <div class='col-md-4'><%= button_to "Join #{clan.name}", clan_join_path(clan), class: 'favour-button' %></div>
       </li>
-    <% end %>
+    <% end %></ul>
   <% end %>
 </div>
