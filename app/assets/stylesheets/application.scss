@@ -135,6 +135,18 @@ body, .container {
       margin-bottom: 7px;
     }
   }
+  #signup_first_step, #signup_second_step, #signup_third_step, #signin_first_step, #signin_second_step {
+    label {
+      font-size: 150%;
+      font-weight: normal;
+    }
+    input {
+      color: black;
+    }
+  }
+  #signup_third_step, #signin_second_step {
+    margin-bottom: 3px;
+  }
 }
 
 .help-button {

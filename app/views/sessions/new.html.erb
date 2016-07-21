@@ -1,13 +1,15 @@
-<%= form_for :session, url: session_path, html: {class: 'sign_in'} do |form| %>
-  <div>
-    <%= form.label :email %>
-    <%= form.email_field :email %>
-  </div>
-  <div>
-    <%= form.label :password %>
-    <%= form.password_field :password %>
-  </div>
-  <div>
-    <%= form.submit "Sign in" %>
-  </div>
-<% end %>
+<div class='form-box'>
+  <%= form_for :session, url: session_path, html: {class: 'sign_in'} do |form| %>
+    <div id='signin_first_step'>
+      <%= form.label :email %>
+      <%= form.email_field :email %>
+    </div>
+    <div id='signin_second_step'>
+      <%= form.label :password %>
+      <%= form.password_field :password %>
+    </div>
+    <div id='signin_third_step'>
+      <%= form.submit "Sign in", class: 'help-button' %>
+    </div>
+  <% end %>
+</div>
