@@ -8,18 +8,24 @@
 </head>
 <body>
   
-<div class='container-fluid'>
+<nav class='navbar navbar-default navbar-fixed-top'>
   <div class='container'>
     <% if signed_in? %>
-      <%= link_to "#{current_user.username}'s dashboard", dashboard_path %>
-      <%= link_to "Sign out", session_path, method: :delete %>
-      <%= current_user.thankyoupoints %> Thank You Points
+      <ul class='nav navbar-nav'>
+        <li id='thankyoupoints'><%= current_user.thankyoupoints %> Thank You Points</li>
+      </ul>
+      <ul class='nav navbar-nav navbar-right'>
+        <li><%= link_to "#{current_user.username}'s dashboard", dashboard_path %></li>
+        <li><%= link_to "Sign out", session_path, method: :delete %></li>
+      </ul>
     <% else %>
-      <%= link_to "Sign in", new_session_path %>
-      <%= link_to "Sign up", new_user_path %>
+      <ul class='nav navbar-nav navbar-right'>
+        <li><%= link_to "Sign in", new_session_path %></li>
+        <li><%= link_to "Sign up", new_user_path %></li>
+      </ul>
     <% end %>
   </div>
-</div>
+</nav>
 
 <div class='container'>
   <%= yield %>
