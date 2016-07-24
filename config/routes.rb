@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create]
   
   #homepages
-  root to: 'home#signed_out'
-  get 'dashboard' => 'home#signed_in'
+  root to: 'home#show', via: :get
+  resource :dashboard, only: [:show]
   
   #clans
   resources :clans, only: [:index, :create] do

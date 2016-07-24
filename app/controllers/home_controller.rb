@@ -1,18 +1,15 @@
 class HomeController < ApplicationController
   
-  before_filter :check_if_user_is_signed_in, only: [:signed_out]
+  before_filter :check_if_user_is_signed_in
     
-  def signout_out
-  end
-  
-  def signed_in
+  def show
   end
   
   private
   
   def check_if_user_is_signed_in
     if signed_in?
-      redirect_to '/dashboard'
+      redirect_to dashboard_path
     end
   end
 

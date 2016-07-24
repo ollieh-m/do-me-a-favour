@@ -2,7 +2,9 @@ module Features
   
   def sign_up(username: 'Testuser', email: 'testuser@email.com', password: '123456')
     visit root_path
-    click_on 'Sign up'
+    within(:css, 'nav') do
+      click_on 'Sign up'
+    end
     fill_in('Username', with: username)
     fill_in('Email', with: email)
     fill_in('Password', with: password)
@@ -16,7 +18,9 @@ module Features
   end
   
   def sign_in(email: 'testuser@email.com', password: '123456')
-    click_on 'Sign in'
+    within(:css, 'nav') do
+      click_on 'Sign in'
+    end
     fill_in('Email', with: email)
     fill_in('Password', with: password)
     within(:css, '.sign_in') do
