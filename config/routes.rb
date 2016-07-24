@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   #homepages
   root to: 'home#show', via: :get
   resource :dashboard, only: [:show]
+  get 'favoursforothers' => 'favoursforothers#show'
+  get 'favoursforme' => 'favoursforme#show'
   
   #clans
   resources :clans, only: [:index, :create] do
@@ -21,9 +23,6 @@ Rails.application.routes.draw do
   
   #accept
   post 'bids/:bid_id/accept' => 'accepts#create'
-    
-  get 'favoursforme' => 'favours#formeindex'
-  get 'favoursforothers' => 'favours#forothersindex'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
