@@ -1,23 +1,23 @@
 class FavoursController < ApplicationController
   
+  include FavoursHelper
+  
   def create
-    @favour = Favour.build_with(users_benefiting: users_benefiting, clans: params[:clan], params: favour_params)
-    if @favour.validate_with(clans: params[:clan])
-      redirect_to request.referer
-    else
+    @favour = Favour.build_with(users_benefiting, clans, favour_params)
+    unless @favour.validate
       flash[:errors] = @favour.errors
-      redirect_to favoursforme_path
     end
+    redirect_to request.referer
   end
   
   private
   
+  def clans
+    clans_array(params[:clan])
+  end
+  
   def users_benefiting
-    array = [current_user]
-    unless params[:users_benefiting].nil?
-      params[:users_benefiting].each{|user_id| array << User.find(user_id.to_i)}
-    end
-    array
+    users_array(current_user,params[:users_benefiting])
   end
   
   def favour_params

@@ -6,47 +6,56 @@ describe Favour do
   it { should have_many :users_benefiting }
   it { should have_many :bids }
 
-  it { should validate_presence_of(:description) }
-  
   context '#build_with' do
-    it 'builds a new favour_clan_relationship associated with a new favour and the specified clans' do
-      association_collection = spy(:association_collection)
-      favour = double(:favour, favour_clan_relationships: association_collection)
+    let(:clans_association_collection){spy(:association_collection)}
+    let(:users_association_collection){spy(:association_collection)}
+    let(:favour){double(:favour, clans: clans_association_collection, users_benefiting: users_association_collection)}
+    
+    it 'initializes a favour and adds the specified clans into the favour.clans collection' do
+      clans = [:dummy_clan_1,:dummy_clan_2]
       allow(Favour).to receive(:new).and_return(favour)
       
-      Favour.build_with(users_benefiting: nil,clans: {'1'=>nil, '2'=>nil}, params: :params)
-      expect(association_collection).to have_received(:build).with({clan_id: 1})
-      expect(association_collection).to have_received(:build).with({clan_id: 2})
+      Favour.build_with(:dummy_users_benefiting, clans, :dummy_favour_params)
+      
+      expect(clans_association_collection).to have_received(:<<).with(clans)
     end
-    it 'builds a new user_favour_relationship associated with a new favour and the specified users' do
-      association_collection = spy(:association_collection)
-      favour = double(:favour, user_favour_relationships: association_collection)
+    it 'initializes a favour and adds the specified users into the favour.users_benefiting collection' do
+      users_benefiting = [:dummy_user_1,:dummy_user_2]
       allow(Favour).to receive(:new).and_return(favour)
       
-      Favour.build_with(users_benefiting: [:user1,:user2],clans: nil,params: :params)
-      expect(association_collection).to have_received(:build).with({user: :user1})
-      expect(association_collection).to have_received(:build).with({user: :user2})
+      Favour.build_with(users_benefiting, :dummy_clans, :dummy_favour_params)
+      
+      expect(users_association_collection).to have_received(:<<).with(users_benefiting)
     end
   end
   
   context '#validate_with' do
     it "adds an error if clans is empty and returns false without saving" do
       favour = Favour.new(description:'Dummy description')
-      result = favour.validate_with(clans:nil)
+      allow_any_instance_of(Favour).to receive(:clans).and_return []
+      
+      result = favour.validate
+      
       expect(favour.errors).to eq ['You need to choose at least one clan']
       expect(Favour.all.count).to eq 0
       expect(result).to eq false
     end
     it "adds an error if the initialized favour has no description and returns false without saving" do
       favour = Favour.new(description:'')
-      result = favour.validate_with(clans:[:clan])
+      allow_any_instance_of(Favour).to receive(:clans).and_return [:dummy_clans]
+      
+      result = favour.validate
+      
       expect(favour.errors).to eq ["Description can't be blank"]
       expect(Favour.all.count).to eq 0
       expect(result).to eq false
     end
     it "adds both errors if the initialized favour has no description and no clans are given" do
       favour = Favour.new(description:'')
-      result = favour.validate_with(clans:nil)
+      allow_any_instance_of(Favour).to receive(:clans).and_return []
+      
+      result = favour.validate
+      
       expect(favour.errors).to eq ['You need to choose at least one clan',"Description can't be blank"]
       expect(Favour.all.count).to eq 0
       expect(result).to eq false
