@@ -3,9 +3,9 @@ class FavoursController < ApplicationController
   include FavoursHelper
   
   def create
-    @favour = Favour.build_with(users_benefiting, clans, favour_params)
-    unless @favour.validate
-      flash[:errors] = @favour.errors
+    favour = Favour.build_with(users_benefiting, clans, favour_params)
+    unless favour.validate
+      flash[:errors] = favour.errors
     end
     redirect_to request.referer
   end
@@ -13,11 +13,11 @@ class FavoursController < ApplicationController
   private
   
   def clans
-    clans_array(params[:clan])
+    generate_clans_array(params[:clan])
   end
   
   def users_benefiting
-    users_array(current_user,params[:users_benefiting])
+    generate_users_array(current_user,params[:users_benefiting])
   end
   
   def favour_params
