@@ -1,10 +1,11 @@
 class FavoursforothersDisplay
   
-  attr_reader :user, :biddable_filter
+  attr_reader :user, :biddable_filter, :bid
   
-  def initialize(user, biddable_filter = BiddableFilter)
+  def initialize(user, biddable_filter = BiddableFilter, bid = Bid)
     @user = user
     @biddable_filter = biddable_filter.new(user)
+    @bid = bid
   end
   
   def bidded_on
@@ -16,7 +17,7 @@ class FavoursforothersDisplay
   end
   
   def new_bid
-    Bid.new
+    bid.new
   end
   
 end
