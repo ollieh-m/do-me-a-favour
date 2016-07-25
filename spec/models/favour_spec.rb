@@ -80,30 +80,5 @@ describe Favour do
       expect(Favour.all.count).to eq 0
     end
   end
-  
-  context '#formeindex_status' do
-    let(:favour1){ Favour.create(description: 'Test') }
-    let(:favour2){ Favour.create(description: 'Test', completed: 'Confirmed') }
-    
-    let(:bid1){ double(:bid, accepted: nil) }
-    let(:bid2){ double(:bid, accepted: nil) }
-    let(:bid3){ double(:bid, accepted: true) }
-
-    it "returns 'Bids in waiting on your response' if the favour has bids in but none have been accepted" do
-      allow_any_instance_of(Favour).to receive(:bids).and_return([bid1,bid2])
-      result = favour1.formeindex_status
-      expect(result).to eq 'Bids in waiting on your response'
-    end
-    it "returns 'A bid has been accepted for this favour' if a bid is accepted but not complete" do
-      allow_any_instance_of(Favour).to receive(:bids).and_return([bid1,bid3])
-      result = favour1.formeindex_status
-      expect(result).to eq 'A bid has been accepted for this favour'
-    end
-    it "returns 'This favour has been carried out' if a favour is complete" do
-      allow_any_instance_of(Favour).to receive(:bids).and_return([bid1,bid3])
-      result = favour2.formeindex_status
-      expect(result).to eq 'This favour has been carried out'
-    end
-  end
 
 end

@@ -20,7 +20,7 @@ class FavoursformeDisplay
   end
   
   def status(favour)
-    status_generator.forme_status(favour)
+    status_generator.formepage_favour_status(favour)
   end
   
 end

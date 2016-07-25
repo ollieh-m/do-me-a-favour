@@ -42,18 +42,6 @@ class Favour < ActiveRecord::Base
     subtract_points(bid)
   end
   
-  def formeindex_status
-    if bids.size > 0
-      if completed == 'Confirmed'
-        'This favour has been carried out'
-      elsif bids.any?{|x| x.accepted == true}
-        'A bid has been accepted for this favour'
-      else 
-        'Bids in waiting on your response'
-      end
-    end
-  end
-  
   private
   
   def add_points(bid)

@@ -31,9 +31,9 @@ describe FavoursforothersDisplay do
     end
   end
   context '#status' do
-    it 'gets the forothers_status from a newly initialized status_generator' do
+    it 'gets the forotherspage_favour_status from the status_generator' do
       favoursforothers_display.status(:favour)
-      expect(generator).to have_received(:forothers_status).with(:favour)
+      expect(generator).to have_received(:forotherspage_favour_status).with(:favour)
     end
   end
 end

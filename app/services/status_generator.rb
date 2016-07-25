@@ -2,11 +2,11 @@ class StatusGenerator
   
   attr_reader :user
   
-  def initialize(user = :dummy)
+  def initialize(user = :optional)
     @user = user
   end
   
-  def forothers_status(favour)
+  def forotherspage_favour_status(favour)
     if favour.bids.all?{|x| x.accepted.nil?}
       'Awaiting response to your bid'
     else
@@ -14,7 +14,7 @@ class StatusGenerator
     end
   end
   
-  def forme_status(favour)
+  def formepage_favour_status(favour)
     if favour.bids.size > 0
       if favour.completed == 'Confirmed'
         'This favour has been carried out'

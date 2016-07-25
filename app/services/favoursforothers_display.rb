@@ -22,7 +22,7 @@ class FavoursforothersDisplay
   end
   
   def status(favour)
-    status_generator.forothers_status(favour)
+    status_generator.forotherspage_favour_status(favour)
   end
   
 end
