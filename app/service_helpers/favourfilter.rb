@@ -4,25 +4,33 @@ class Favourfilter
     @user = user
   end
   
-  def favours_to_bid_on
+  def biddable_on_by_user
     favours_array = extract_favours_from_clans
     favours_array = exclude_favours_with_accepted_bid(favours_array)
     favours_array = exclude_favours_not_benefiting_others(favours_array)
     exclude_favours_user_has_bidded_on(favours_array)
   end
   
-  def favours_bidded_on
+  def bidded_on_by_user
     @user.favours_bidded_on
+  end
+  
+  def benefiting_user
+    @user.favours_for_me
   end
   
   private
   
   def extract_favours_from_clans
-    favours_array = []
+    Favour.where(id: favour_ids_from_user_clans)
+  end
+  
+  def favour_ids_from_user_clans
+    ids = []
     @user.clans.each do |clan|
-      favours_array += clan.favours
+      ids += clan.favours.map(&:id)
     end
-    favours_array.uniq
+    ids
   end
   
   def exclude_favours_with_accepted_bid(favours_array)
@@ -34,7 +42,7 @@ class Favourfilter
   end
   
   def exclude_favours_user_has_bidded_on(favours_array)
-    favours_array - favours_bidded_on
+    favours_array - bidded_on_by_user
   end
   
 end

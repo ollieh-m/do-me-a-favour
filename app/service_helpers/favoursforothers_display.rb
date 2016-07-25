@@ -1,4 +1,4 @@
-class Favoursforothers
+class FavoursforothersDisplay
   
   attr_reader :user, :favourfilter
   
@@ -8,11 +8,11 @@ class Favoursforothers
   end
   
   def bidded_on
-    favourfilter.favours_bidded_on
+    favourfilter.bidded_on_by_user
   end
   
   def biddable
-    favourfilter.favours_to_bid_on
+    favourfilter.biddable_on_by_user
   end
   
   def new_bid

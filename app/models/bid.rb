@@ -13,7 +13,7 @@ class Bid < ActiveRecord::Base
   end
   
   def validate_acceptance_with(user:)
-    if user.favours_for_me.include?(favour)
+    if favours_benefiting(user).include?(favour)
       save
     else
       @errors = ['You can only accept a bid on a favour you benefit from']
@@ -24,7 +24,11 @@ class Bid < ActiveRecord::Base
   private
   
   def favours_user_can_bid_on
-    Favourfilter.new(user).favours_to_bid_on
+    Favourfilter.new(user).biddable_on_by_user
+  end
+  
+  def favours_benefiting(user)
+    Favourfilter.new(user).benefiting_user
   end
   
 end
