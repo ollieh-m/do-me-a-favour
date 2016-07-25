@@ -8,7 +8,7 @@
   <%= form_tag :favours do |f| %>
     <div id='help_first_step'>
       <h3>To post a new favour, first choose clans to post the favour in...</h3>
-      <% @clans.each do |clan| %>
+      <% @favoursformedisplay.clans.each do |clan| %>
         <%= label_tag("clan[#{clan.id}]".to_sym, clan.name) %>
         <%= check_box_tag("clan[#{clan.id}]".to_sym) %>
       <% end %>
@@ -22,7 +22,7 @@
         <h3>Choose anyone else this favour is for...</h3>
       </div>
       <div class='col-md-6'>
-        <%= select_tag(:users_benefiting, options_from_collection_for_select(@users,:id,:username), {multiple: true}) %>
+        <%= select_tag(:users_benefiting, options_from_collection_for_select(@favoursformedisplay.users,:id,:username), {multiple: true}) %>
       </div>
     </div>
     <div id='help_fourth_step'>
@@ -31,16 +31,16 @@
   <% end %>
 </div>
 
-<% if @favours_for_me.count > 0 %>
+<% if @favoursformedisplay.favours.count > 0 %>
   <div class='favours-benefiting-me summary'>
     <h1>Favours that'll help me...</h1>
-    <ul><% @favours_for_me.each do |favour| %>
+    <ul><% @favoursformedisplay.favours.each do |favour| %>
       <li class='row top-level'>
         <div class='col-md-3'>
           <%= favour.description %>
         </div>
         <div class='status col-md-3'>
-          <%= favour.formeindex_status %>
+          <%= @favoursformedisplay.status(favour) %>
         </div>
         <div class='col-md-6'>
           <% unless favour.bids.nil? %>
@@ -50,11 +50,11 @@
                   <%= "#{bid.user.username} bidded #{bid.amount}" %>
                 </div>
                 <div class='col-md-6'>
-                  <% if favour.formeindex_status =~ /accepted/ %>
+                  <% if @favoursformedisplay.status(favour) =~ /accepted/ %>
                     <% if bid.accepted %>
                       <%= button_to "#{bid.user.username} has done this favour", favour_completion_path(favour), class: 'favour-button' %>
                     <% end %>
-                  <% elsif favour.formeindex_status =~ /carried/ %>
+                  <% elsif @favoursformedisplay.status(favour) =~ /carried/ %>
                     <% if bid.accepted %>
                       <%= bid.user.username %> did the favour
                     <% end %>

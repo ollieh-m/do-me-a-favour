@@ -4,16 +4,16 @@
   <% end %>
 <% end %>
 
-<% if @favoursforothers.biddable %>
+<% if @favoursforothersdisplay.biddable %>
   <div class='favours-i-can-bid-on form-box'>
     <h1>Favours I can bid on...</h1>
-    <ul><% @favoursforothers.biddable.each do |favour| %>
+    <ul><% @favoursforothersdisplay.biddable.each do |favour| %>
       <li class='row'>
         <div class='col-md-4'>
           <%= favour.description %>
         </div>
         <div class='col-md-8'>
-          <%= form_for [favour, @favoursforothers.new_bid] do |f| %>
+          <%= form_for [favour, @favoursforothersdisplay.new_bid] do |f| %>
             <%= f.label :amount, "Number of thank you points" %>
             <%= f.number_field(:amount, in: 1.0..100.0) %>
             <%= f.submit "Bid", class: 'bid-button' %>
@@ -24,16 +24,16 @@
   </div>
 <% end %>
 
-<% if @favoursforothers.bidded_on %>
+<% if @favoursforothersdisplay.bidded_on %>
   <div class='favours-i-bidded-on summary'>
     <h1>Favours I've bidded on...</h1>
-    <ul><% @favoursforothers.bidded_on.each do |favour| %>
+    <ul><% @favoursforothersdisplay.bidded_on.each do |favour| %>
       <li class='row top-level'>
         <div class='col-md-6'>
           <%= favour.description %>
         </div>
         <div class='status col-md-6'>
-          <%= @favoursforothers.status(favour) %>
+          <%= @favoursforothersdisplay.status(favour) %>
         </div>
       </li>
     <% end %></ul>

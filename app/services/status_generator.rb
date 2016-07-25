@@ -1,8 +1,8 @@
 class StatusGenerator
   
-  attr_reader :favour, :user
+  attr_reader :user
   
-  def initialize(user)
+  def initialize(user = :dummy)
     @user = user
   end
   
@@ -11,6 +11,18 @@ class StatusGenerator
       'Awaiting response to your bid'
     else
       accepted_or_rejected(favour)
+    end
+  end
+  
+  def forme_status(favour)
+    if favour.bids.size > 0
+      if favour.completed == 'Confirmed'
+        'This favour has been carried out'
+      elsif favour.bids.any?{|x| x.accepted == true}
+        'A bid has been accepted for this favour'
+      else 
+        'Bids in waiting on your response'
+      end
     end
   end
   
