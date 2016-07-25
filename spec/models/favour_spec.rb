@@ -29,7 +29,7 @@ describe Favour do
     end
   end
   
-  context '#validate_with' do
+  context '#validate' do
     it "adds an error if clans is empty and returns false without saving" do
       favour = Favour.new(description:'Dummy description')
       allow_any_instance_of(Favour).to receive(:clans).and_return []

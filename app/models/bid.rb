@@ -1,5 +1,7 @@
 class Bid < ActiveRecord::Base
   
+  include ErrorsHelper
+  
   belongs_to :favour
   belongs_to :user
   
@@ -7,7 +9,7 @@ class Bid < ActiveRecord::Base
     if favours_user_can_bid_on.include?(favour) 
       save
     else
-      @errors = ['You can only bid on a favour posted to one of your clans that other users will benefit from - and only if no bid has already been accepted']
+      set_error('You can only bid on a favour posted to one of your clans that other users will benefit from - and only if no bid has already been accepted')
       false
     end
   end
@@ -16,7 +18,7 @@ class Bid < ActiveRecord::Base
     if favours_benefiting(user).include?(favour)
       save
     else
-      @errors = ['You can only accept a bid on a favour you benefit from']
+      set_error('You can only accept a bid on a favour you benefit from')
       false
     end
   end

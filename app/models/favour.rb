@@ -1,4 +1,6 @@
 class Favour < ActiveRecord::Base
+  
+  include ErrorsHelper
 
   has_many :favour_clan_relationships
   has_many :clans, through: :favour_clan_relationships
@@ -76,10 +78,6 @@ class Favour < ActiveRecord::Base
     else
       'Your bid is accepted and awaiting fulfilment'
     end
-  end
-  
-  def set_error(error_message)
-    @errors.nil? ? @errors = [error_message] : @errors << error_message
   end
   
   def add_points(bid)
