@@ -5,8 +5,8 @@ class FavoursforothersDisplay
   def initialize(user, biddable_filter = BiddableFilter, bid = Bid, status_generator = StatusGenerator)
     @user = user
     @biddable_filter = biddable_filter.new(user)
+    @status_generator = status_generator.new(user)
     @bid = bid
-    @status_generator = status_generator
   end
   
   def bidded_on
@@ -22,7 +22,7 @@ class FavoursforothersDisplay
   end
   
   def status(favour)
-    status_generator.new(favour,user).forothers_status
+    status_generator.forothers_status(favour)
   end
   
 end
