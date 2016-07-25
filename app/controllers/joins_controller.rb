@@ -1,15 +1,27 @@
 class JoinsController < ApplicationController
    
   def create
-    clan = Clan.find(params[:clan_id])
-    current_user.clans << clan
+    join_clan
     redirect_to request.referer
   end
   
   def destroy
-    clan = Clan.find(params[:clan_id])
-    current_user.clans.delete(clan)
+    leave_clan
     redirect_to request.referer
+  end
+  
+  private
+  
+  def join_clan
+    current_user.clans << clan
+  end
+  
+  def leave_clan
+    current_user.clans.delete(clan)
+  end
+  
+  def clan
+    Clan.find(params[:clan_id])
   end
    
 end
