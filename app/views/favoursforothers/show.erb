@@ -33,7 +33,7 @@
           <%= favour.description %>
         </div>
         <div class='status col-md-6'>
-          <%= favour.forothersindex_status(user: current_user) %>
+          <%= @favoursforothers.status(favour) %>
         </div>
       </li>
     <% end %></ul>

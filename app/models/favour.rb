@@ -42,14 +42,6 @@ class Favour < ActiveRecord::Base
     subtract_points(bid)
   end
   
-  def forothersindex_status(user:)
-    if self.bids.all?{|x| x.accepted.nil?}
-      'Awaiting response to your bid'
-    else
-      accepted_or_rejected(user)
-    end
-  end
-  
   def formeindex_status
     if bids.size > 0
       if completed == 'Confirmed'
@@ -63,22 +55,6 @@ class Favour < ActiveRecord::Base
   end
   
   private
-  
-  def accepted_or_rejected(user)
-    if bids.select{|x| x.accepted == true}.first.user == user
-      completed_or_awaiting_fulfilment
-    else
-      'Sorry, your bid was rejected'
-    end
-  end
-  
-  def completed_or_awaiting_fulfilment
-    if completed == 'Confirmed'
-      'Nice one - you did this favour'
-    else
-      'Your bid is accepted and awaiting fulfilment'
-    end
-  end
   
   def add_points(bid)
     bid.user.thankyoupoints += bid.amount

@@ -1,10 +1,14 @@
 describe FavoursforothersDisplay do
   
   let(:user){ spy(:user) }
+  
   let(:filter){ spy(:filter) }
   let(:biddable_filter){ double(:biddable_filter, new: filter) }
+  
   let(:bid){ double(:bid, new: nil) }
-  let(:favoursforothers_display){ described_class.new(user, biddable_filter, bid) }
+  let(:status_generator){ double(:status_generator) }
+  
+  let(:favoursforothers_display){ described_class.new(user, biddable_filter, bid, status_generator) }
   
   context '#bidded_on' do
     it 'gets the favours the user has bidded on' do
@@ -22,6 +26,14 @@ describe FavoursforothersDisplay do
     it 'initializes a new bid' do
       favoursforothers_display.new_bid
       expect(bid).to have_received(:new)
+    end
+  end
+  context '#status' do
+    it 'gets the forothers_status from a newly initialized status_generator' do
+      generator = spy(:generator)
+      allow(status_generator).to receive(:new).with(:favour,user).and_return(generator)
+      favoursforothers_display.status(:favour)
+      expect(generator).to have_received(:forothers_status)
     end
   end
 end
