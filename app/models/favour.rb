@@ -27,7 +27,7 @@ class Favour < ActiveRecord::Base
     end
   end
   
-  def validate_completion_with(user:)
+  def validate_completion(user)
     if users_benefiting.include?(user)
       save
     else

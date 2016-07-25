@@ -62,12 +62,12 @@ describe Favour do
     end
   end
   
-  context '#validate_completion_with' do
+  context '#validate_completion' do
     it 'saves the updated favour if the favour benefits the specified user' do
       favour = Favour.new(description: 'Test', completed: 'Confirmed')
       user = double(:user)
       allow_any_instance_of(Favour).to receive(:users_benefiting).and_return([user])
-      result = favour.validate_completion_with(user: user)
+      result = favour.validate_completion(user)
       expect(result).to eq true
       expect(Favour.all.count).to eq 1
     end
@@ -75,7 +75,7 @@ describe Favour do
       favour = Favour.new(description: 'Test', completed: 'Confirmed')
       user = double(:user)
       allow_any_instance_of(Favour).to receive(:users_benefiting).and_return([])
-      result = favour.validate_completion_with(user: user)
+      result = favour.validate_completion(user)
       expect(result).to eq false
       expect(Favour.all.count).to eq 0
     end

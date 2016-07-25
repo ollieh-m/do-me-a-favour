@@ -1,10 +1,6 @@
 class Clan < ActiveRecord::Base
     
-  has_many :user_clan_relationships do
-    def destroy_where(user:)
-      self.find_by(user: user).destroy
-    end
-  end
+  has_many :user_clan_relationships
   has_many :users, through: :user_clan_relationships
   
   has_many :favour_clan_relationships
