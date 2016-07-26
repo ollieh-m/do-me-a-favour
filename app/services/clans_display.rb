@@ -15,7 +15,7 @@ class ClansDisplay
   end
   
   def other_clans
-    Clan.all_except(my_clans)
+    Clan.all - my_clans
   end
   
 end

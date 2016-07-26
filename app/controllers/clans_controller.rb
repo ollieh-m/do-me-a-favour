@@ -5,7 +5,7 @@ class ClansController < ApplicationController
   end
   
   def create
-    clan = Clan.build_with(user: current_user, params: clan_params)
+    clan = Clan.build_with(current_user, clan_params)
     unless clan.save
       flash[:errors] = clan.errors.full_messages
     end

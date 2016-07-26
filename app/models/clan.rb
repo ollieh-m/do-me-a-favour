@@ -8,14 +8,10 @@ class Clan < ActiveRecord::Base
   
   validates :name, presence: true, uniqueness: true
   
-  def self.build_with(user:, params:)
-    self.new(params).tap do |clan|
-      clan.user_clan_relationships.build(user: user)
+  def self.build_with(current_user, clan_params)
+    self.new(clan_params).tap do |clan|
+      clan.users << current_user
     end
-  end
-  
-  def self.all_except(clans)
-    self.all - clans
   end
     
 end
