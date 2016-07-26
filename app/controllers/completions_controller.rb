@@ -3,7 +3,7 @@ class CompletionsController < ApplicationController
   def create
     favour = complete_favour
     if favour.validate_completion(current_user)
-      favour.exchange_thankyou_points
+      thankyoupoints_manager(favour).exchange_thankyou_points
     else
       flash[:errors] = favour.errors
     end
@@ -16,6 +16,10 @@ class CompletionsController < ApplicationController
     Favour.find(params[:favour_id]).tap do |favour|
       favour.completed = 'Confirmed'
     end
+  end
+  
+  def thankyoupoints_manager(favour)
+    ThankyoupointsManager.new(favour)
   end
   
 end

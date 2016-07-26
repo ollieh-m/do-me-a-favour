@@ -36,24 +36,4 @@ class Favour < ActiveRecord::Base
     end
   end
   
-  def exchange_thankyou_points
-    bid = bids.select{|x| x.accepted }.first
-    add_points(bid)
-    subtract_points(bid)
-  end
-  
-  private
-  
-  def add_points(bid)
-    bid.user.thankyoupoints += bid.amount
-    bid.user.save
-  end
-  
-  def subtract_points(bid)
-    users_benefiting.each do |user|
-      user.thankyoupoints -= (bid.amount / users_benefiting.length)
-      user.save
-    end
-  end
-  
 end
