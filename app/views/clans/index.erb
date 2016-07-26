@@ -5,7 +5,7 @@
 <% end %>
 
 <div class='form-box'>
-  <%= form_for @clan do |f| %>
+  <%= form_for @clansdisplay.new_clan do |f| %>
     <div id='clan_first_step'>
       <h3>To create a new clan, first give it a name...</h3>
       <%= f.label :name %>
@@ -22,9 +22,9 @@
 </div>
 
 <div class='myclans summary'>
-  <% unless @myclans.nil? %>
+  <% unless @clansdisplay.my_clans.nil? %>
     <h1>Clans I am in...</h1>
-    <ul><% @myclans.each do |clan| %>
+    <ul><% @clansdisplay.my_clans.each do |clan| %>
       <li class='row top-level'>
         <div class='col-md-4'><%= clan.name %></div>
         <div class='col-md-4'><%= clan.description %></div>
@@ -35,9 +35,9 @@
 </div>
 
 <div class='otherclans summary'>
-  <% unless @otherclans.nil? %>
+  <% unless @clansdisplay.other_clans.nil? %>
     <h1>Clans I'm not in...</h1>
-    <ul><% @otherclans.each do |clan| %>
+    <ul><% @clansdisplay.other_clans.each do |clan| %>
       <li class='row top-level'>
         <div class='col-md-4'><%= clan.name %></div>
         <div class='col-md-4'><%= clan.description %></div>
