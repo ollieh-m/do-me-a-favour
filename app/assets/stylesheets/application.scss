@@ -149,7 +149,7 @@ body, .container {
   }
 }
 
-.help-button {
+.full-width-transparent-button {
   width: 100%;
   padding: 5px;
   border: 5px solid white;
@@ -160,7 +160,7 @@ body, .container {
   background-color: transparent;
 }
 
-.help-button:hover {
+.full-width-transparent-button:hover {
   background-color: white;
   color: black;
   text-decoration: none;
@@ -183,7 +183,7 @@ body, .container {
   }
 }
 
-.favour-button {
+.full-width-black-button {
   width: 100%;
   margin: 3px 0;
   padding: 2px;
@@ -196,7 +196,7 @@ body, .container {
   white-space: normal;
 }
 
-.favour-button:hover {
+.full-width-black-button:hover {
   background-color: white;
   border: 5px solid black;
   color: black;

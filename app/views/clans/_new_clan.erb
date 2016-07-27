@@ -1,0 +1,16 @@
+<div class='form-box'>
+  <%= form_for new_clan do |f| %>
+    <div id='clan_first_step'>
+      <h3>To create a new clan, first give it a name...</h3>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+    <div id='clan_second_step'>
+      <%= f.label(:description, "Then describe the clan...") %>
+      <%= f.text_area(:description, rows: 5) %>
+    </div>
+    <div id='clan_third_step'>
+      <%= f.submit "Create new clan", class: 'full-width-transparent-button' %>
+    </div>
+  <% end %>
+</div>

@@ -26,7 +26,7 @@
       </div>
     </div>
     <div id='help_fourth_step'>
-      <%= submit_tag("Request help", class: 'help-button') %>
+      <%= submit_tag("Request help", class: 'full-width-transparent-button') %>
     </div>
   <% end %>
 </div>
@@ -52,14 +52,14 @@
                 <div class='col-md-6'>
                   <% if @favoursformedisplay.status(favour) =~ /accepted/ %>
                     <% if bid.accepted %>
-                      <%= button_to "#{bid.user.username} has done this favour", favour_completion_path(favour), class: 'favour-button' %>
+                      <%= button_to "#{bid.user.username} has done this favour", favour_completion_path(favour), class: 'full-width-black-button' %>
                     <% end %>
                   <% elsif @favoursformedisplay.status(favour) =~ /carried/ %>
                     <% if bid.accepted %>
                       <%= bid.user.username %> did the favour
                     <% end %>
                   <% else %>
-                    <%= button_to 'Accept bid', "bids/#{bid.id}/accept", class: 'favour-button' %>
+                    <%= button_to 'Accept bid', "bids/#{bid.id}/accept", class: 'full-width-black-button' %>
                   <% end %>
                 </div>
               </li>

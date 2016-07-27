@@ -1,0 +1,6 @@
+<div class='myclans summary'>
+  <h1>Clans I am in...</h1>
+  <ul><% my_clans.each do |clan| %>
+    <%= render partial: 'my_clan', locals: {clan: clan} %>
+  <% end %></ul>
+</div>
