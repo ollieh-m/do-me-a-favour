@@ -1,0 +1,6 @@
+<div class='favours-i-can-bid-on form-box'>
+  <h1>Favours I can bid on...</h1>
+  <ul><% biddable.each do |favour| %>
+    <%= render partial: 'biddable_favour', locals: {favour: favour, new_bid: new_bid} %>
+  <% end %></ul>
+</div>

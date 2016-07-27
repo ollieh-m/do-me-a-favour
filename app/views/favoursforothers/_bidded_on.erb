@@ -1,0 +1,6 @@
+<div class='favours-i-bidded-on summary'>
+  <h1>Favours I've bidded on...</h1>
+  <ul><% favoursforothersdisplay.bidded_on.each do |favour| %>
+    <%= render partial: 'bidded_on_favour', locals: {favour: favour, status: favoursforothersdisplay.status(favour)} %>
+  <% end %></ul>
+</div>

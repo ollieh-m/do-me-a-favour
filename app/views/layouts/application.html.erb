@@ -1,35 +1,19 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Do Me A Favour</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
+
 <body>
-  
-<nav class='navbar navbar-default navbar-fixed-top'>
+  <%= render partial: 'navbar' %>
   <div class='container'>
-    <% if signed_in? %>
-      <ul class='nav navbar-nav'>
-        <li id='thankyoupoints'><%= current_user.thankyoupoints %> Thank You Points</li>
-      </ul>
-      <ul class='nav navbar-nav navbar-right'>
-        <li><%= link_to "#{current_user.username}'s dashboard", dashboard_path %></li>
-        <li><%= link_to "Sign out", session_path, method: :delete %></li>
-      </ul>
-    <% else %>
-      <ul class='nav navbar-nav navbar-right'>
-        <li><%= link_to "Sign in", new_session_path %></li>
-        <li><%= link_to "Sign up", new_user_path %></li>
-      </ul>
-    <% end %>
+    <%= render partial: 'errors' %>
+    <%= yield %>
   </div>
-</nav>
-
-<div class='container'>
-  <%= yield %>
-</div>
-
 </body>
+
 </html>

@@ -1,9 +1,3 @@
-<% unless flash[:errors].nil? %>
-  <% flash[:errors].each do |error| %>
-    <li><%= error %></li>
-  <% end %>
-<% end %>
-
 <%= render partial: 'new_favour', locals: {clans: @favoursformedisplay.clans, users: @favoursformedisplay.users} %>
 
 <% if @favoursformedisplay.favours.count > 0 %>

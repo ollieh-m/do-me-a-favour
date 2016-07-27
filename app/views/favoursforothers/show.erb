@@ -1,41 +1,7 @@
-<% unless flash[:errors].nil? %>
-  <% flash[:errors].each do |error| %>
-    <li><%= error %></li>
-  <% end %>
-<% end %>
-
 <% if @favoursforothersdisplay.biddable %>
-  <div class='favours-i-can-bid-on form-box'>
-    <h1>Favours I can bid on...</h1>
-    <ul><% @favoursforothersdisplay.biddable.each do |favour| %>
-      <li class='row'>
-        <div class='col-md-4'>
-          <%= favour.description %>
-        </div>
-        <div class='col-md-8'>
-          <%= form_for [favour, @favoursforothersdisplay.new_bid] do |f| %>
-            <%= f.label :amount, "Number of thank you points" %>
-            <%= f.number_field(:amount, in: 1.0..100.0) %>
-            <%= f.submit "Bid", class: 'bid-button' %>
-          <% end %>
-        </div>
-      </li>
-    <% end %></ul>
-  </div>
+  <%= render partial: 'biddable', locals: {biddable: @favoursforothersdisplay.biddable, new_bid: @favoursforothersdisplay.new_bid} %>
 <% end %>
 
 <% if @favoursforothersdisplay.bidded_on %>
-  <div class='favours-i-bidded-on summary'>
-    <h1>Favours I've bidded on...</h1>
-    <ul><% @favoursforothersdisplay.bidded_on.each do |favour| %>
-      <li class='row top-level'>
-        <div class='col-md-6'>
-          <%= favour.description %>
-        </div>
-        <div class='status col-md-6'>
-          <%= @favoursforothersdisplay.status(favour) %>
-        </div>
-      </li>
-    <% end %></ul>
-  </div>
+  <%= render partial: 'bidded_on', locals: {favoursforothersdisplay: @favoursforothersdisplay} %>
 <% end %>
