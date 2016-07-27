@@ -1,0 +1,4 @@
+<% clans.each do |clan| %>
+  <%= label_tag("clan[#{clan.id}]".to_sym, clan.name) %>
+  <%= check_box_tag("clan[#{clan.id}]".to_sym) %>
+<% end %>

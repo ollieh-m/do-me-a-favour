@@ -1,0 +1,6 @@
+<div class='favours-benefiting-me summary'>
+  <h1>Favours that'll help me...</h1>
+  <ul><% favoursformedisplay.favours.each do |favour| %>
+    <%= render partial: 'favour', locals: {favour: favour, favoursformedisplay: favoursformedisplay} %>
+  <% end %></ul>
+</div>

@@ -1,0 +1,18 @@
+<li id='bid_<%=bid.id%>' class='row'>
+  <div class='col-md-6'>
+    <%= "#{bid.user.username} bidded #{bid.amount}" %>
+  </div>
+  <div class='col-md-6'>
+    <% if favour_status =~ /accepted/ %>
+      <% if bid.accepted %>
+        <%= button_to "#{bid.user.username} has done this favour", favour_completion_path(favour), class: 'full-width-black-button' %>
+      <% end %>
+    <% elsif favour_status =~ /carried/ %>
+      <% if bid.accepted %>
+        <%= bid.user.username %> did the favour
+      <% end %>
+    <% else %>
+      <%= button_to 'Accept bid', "bids/#{bid.id}/accept", class: 'full-width-black-button' %>
+    <% end %>
+  </div>
+</li>

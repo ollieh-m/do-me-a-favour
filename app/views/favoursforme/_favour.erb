@@ -1,0 +1,11 @@
+<li class='row top-level'>
+  <div class='col-md-3'>
+    <%= favour.description %>
+  </div>
+  <div class='status col-md-3'>
+    <%= favoursformedisplay.status(favour) %>
+  </div>
+  <div class='col-md-6'>
+    <%= render partial: 'bids', locals: {bids: favour.bids, favour_status: favoursformedisplay.status(favour), favour: favour} %>
+  </div>
+</li>

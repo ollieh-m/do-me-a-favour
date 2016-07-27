@@ -1,0 +1,5 @@
+<% unless bids.nil? %>
+  <ul><% bids.each do |bid| %>
+    <%= render partial: 'bid', locals: {bid: bid, favour_status: favour_status, favour: favour} %>
+  <% end %></ul>
+<% end %>
