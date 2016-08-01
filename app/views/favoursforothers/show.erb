@@ -1,7 +1,7 @@
-<% if @favoursforothersdisplay.biddable %>
+<% if @favoursforothersdisplay.biddable.count > 0 %>
   <%= render partial: 'biddable', locals: {biddable: @favoursforothersdisplay.biddable, new_bid: @favoursforothersdisplay.new_bid} %>
 <% end %>
 
-<% if @favoursforothersdisplay.bidded_on %>
+<% if @favoursforothersdisplay.bidded_on.count > 0 %>
   <%= render partial: 'bidded_on', locals: {favoursforothersdisplay: @favoursforothersdisplay} %>
 <% end %>

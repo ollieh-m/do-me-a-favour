@@ -1,9 +1,9 @@
 <%= render partial: 'new_clan', locals: {new_clan: @clansdisplay.new_clan} %>
 
-<% unless @clansdisplay.my_clans.nil? %>
+<% if @clansdisplay.my_clans.count > 0 %>
   <%= render partial: 'my_clans', locals: {my_clans: @clansdisplay.my_clans} %>
 <% end %>
 
-<% unless @clansdisplay.other_clans.nil? %>
+<% if @clansdisplay.other_clans.count > 0 %>
   <%= render partial: 'other_clans', locals: {other_clans: @clansdisplay.other_clans} %>
 <% end %>
