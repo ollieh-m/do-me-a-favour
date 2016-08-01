@@ -88,6 +88,7 @@ body, .container {
     }
   }
   #help_second_step {
+    display: none;
     label {
       font-size: 175%;
       margin: 0;
@@ -100,6 +101,11 @@ body, .container {
     }
   }
   #help_third_step {
+    display: none;
+    margin: 0;
+    .col-md-6 {
+      padding: 0;
+    }
     h3 {
       margin-top: 0;
     }
@@ -109,6 +115,9 @@ body, .container {
       font-size: 100%;
       margin-bottom: 10px;
     }
+  }
+  #help_fourth_step {
+    display: none;
   }
   #clan_first_step {
     h3 {
@@ -147,6 +156,14 @@ body, .container {
   #signup_third_step, #signin_second_step {
     margin-bottom: 3px;
   }
+}
+
+.next {
+  background-color: white;
+  color: black;
+  width: 50px;
+  text-align: center;
+  cursor: pointer;
 }
 
 .full-width-transparent-button {

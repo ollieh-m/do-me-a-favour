@@ -3,10 +3,16 @@
     <div id='help_first_step'>
       <h3>To post a new favour, first choose clans to post the favour in...</h3>
       <%= render partial: 'clans', locals: {clans: clans} %>
+      <div id='to_second_step' class='next'>
+        NEXT...
+      </div>
     </div>
     <div id='help_second_step'>
       <%= label_tag(:description, "Next, describe the favour...") %>
       <%= text_area_tag(:description, nil, rows: 5) %>
+      <div id='to_third_step' class='next'>
+        NEXT...
+      </div>
     </div>
     <div id='help_third_step' class='row'>
       <div class='col-md-6'>
@@ -14,6 +20,9 @@
       </div>
       <div class='col-md-6'>
         <%= select_tag(:users_benefiting, options_from_collection_for_select(users,:id,:username), {multiple: true}) %>
+      </div>
+      <div id='to_fourth_step' class='col-md-6 next'>
+        NEXT...
       </div>
     </div>
     <div id='help_fourth_step'>
