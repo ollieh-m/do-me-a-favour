@@ -1,11 +1,8 @@
 $(document).ready(function(){
-  
   reveal('second');
   reveal('third');
   reveal('fourth');
-  
   linkSearchToSelectInput('users-benefiting-search');
-
 });
 
 var reveal = function(step){
@@ -15,12 +12,18 @@ var reveal = function(step){
   });
 };
 
+var checkForMatch = function(searchArray,optionText) {
+  return searchArray.some(function(searchTerm){
+    return searchTerm === optionText;
+  });
+};
+
 var linkSearchToSelectInput = function(searchBox){
   $('#' + searchBox).on('input', function(){
-    var search = $(this).val();
+    var searchArray = $(this).val().split(/[,;]/);
     $('select option').each(function(index){
       var option = $(this);
-      if (option.text().match(new RegExp(search))) {
+      if (checkForMatch(searchArray,option.text())) {
         option.prop('selected',true);
       } else {
         option.prop('selected',false)
