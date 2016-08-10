@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  console.log('testing that the js is working');
   reveal('second');
   reveal('third');
   reveal('fourth');
