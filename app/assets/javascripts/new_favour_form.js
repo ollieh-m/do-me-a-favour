@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  console.log('testing that the js is working');
+  console.log('Hello from javascript land - this means the JS is being compiled');
   reveal('second');
   reveal('third');
   reveal('fourth');
