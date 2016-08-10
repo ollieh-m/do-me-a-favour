@@ -1,10 +1,10 @@
-$(document).ready(function(){
+var ready = function(){
   console.log('Hello from javascript land - this means the JS is being compiled');
   reveal('second');
   reveal('third');
   reveal('fourth');
   linkSearchToSelectInput('users-benefiting-search');
-});
+};
 
 var reveal = function(step){
   $('#to_' + step + '_step').on('click', function(){
@@ -32,3 +32,5 @@ var linkSearchToSelectInput = function(searchBox){
     });
   });
 };
+
+document.addEventListener("turbolinks:load", ready);
